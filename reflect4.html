@@ -309,6 +309,8 @@
   }
 
   .decomp-scroll-box {
+    position: relative;
+    isolation: isolate;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     background: #fafafa;
@@ -317,17 +319,20 @@
     overflow-y: auto;
     margin-top: 16px;
   }
-  /* Sticky title band: padding + opaque layer so scrolled text runs underneath */
+  /* Sticky band: title + intro stay fixed; only tracker scrolls beneath */
   .decomp-scroll-head {
     position: sticky;
     top: 0;
-    z-index: 4;
-    margin: -16px -16px 14px -16px;
-    padding: 18px 20px 16px 20px;
-    background: #fff;
+    z-index: 5;
+    margin: -16px -16px 16px -16px;
+    padding: 18px 20px 18px 20px;
+    background-color: #ffffff;
     border-bottom: 1px solid #e0e0e0;
     border-radius: 7px 7px 0 0;
-    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 16px -4px rgba(0, 0, 0, 0.1);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   .decomp-scroll-box h3 {
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -338,6 +343,16 @@
     color: #888;
     margin: 0;
     padding: 0;
+  }
+  .decomp-scroll-head .decomp-scroll-intro {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin: 14px 0 0 0;
+    padding-top: 14px;
+    border-top: 1px solid #ececec;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
   }
 
   /* === PROGRESSIVE REVEAL === */
@@ -1015,10 +1030,10 @@ function TransactionSequencer() {
         <div className="decomp-scroll-box">
           <div className="decomp-scroll-head">
             <h3>Flow Statements &mdash; decomposing the change</h3>
+            <p className="decomp-scroll-intro">
+              In practice, most people encounter the income statement first &mdash; it is what investors, managers, and analysts tend to care about most, and standard presentations reflect that. We show the statements in a different order here to make the logical structure visible: the statement of changes in equities is the full bridge between the two balance sheets, the cash flow statement decomposes the change in cash, and the income statement decomposes one line of the equities statement &mdash; net income.
+            </p>
           </div>
-          <p style={{ fontSize: 12, color: '#888', fontStyle: 'italic', margin: '0 0 12px', fontFamily: "'Helvetica Neue', Arial, sans-serif", lineHeight: 1.5 }}>
-            In practice, most people encounter the income statement first &mdash; it is what investors, managers, and analysts tend to care about most, and standard presentations reflect that. We show the statements in a different order here to make the logical structure visible: the statement of changes in equities is the full bridge between the two balance sheets, the cash flow statement decomposes the change in cash, and the income statement decomposes one line of the equities statement &mdash; net income.
-          </p>
           <DecompTracker
             isEntries={isEntries}
             cfsEntries={cfsEntries}
