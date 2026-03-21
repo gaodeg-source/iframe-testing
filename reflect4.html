@@ -324,8 +324,8 @@
     position: sticky;
     top: 0;
     z-index: 5;
-    margin: 12px -16px 16px -16px;
-    padding: 18px 20px 18px 20px;
+    margin: 12px -16px 10px -16px;
+    padding: 16px 20px;
     background-color: #ffffff;
     border: 1px solid #e4e4e4;
     border-radius: 6px;
@@ -347,13 +347,12 @@
     margin: 0;
     padding: 0;
   }
-  .decomp-scroll-head .decomp-scroll-intro {
+  /* Intro scrolls with flow statements below (not part of sticky title bar) */
+  .decomp-scroll-intro {
     font-size: 12px;
     color: #888;
     font-style: italic;
-    margin: 14px 0 0 0;
-    padding-top: 14px;
-    border-top: 1px solid #ececec;
+    margin: 0 0 14px 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.5;
   }
@@ -714,10 +713,10 @@ function DecompTracker({ isEntries, cfsEntries, sceEntries, netIncome, step, acc
       <ChangeSummary label="Change in Equities" opening={0} closing={closingEquities} />
       <div className="decomp-scroll-head">
         <h3>Flow Statements &mdash; decomposing the change</h3>
-        <p className="decomp-scroll-intro">
-          In practice, most people encounter the income statement first &mdash; it is what investors, managers, and analysts tend to care about most, and standard presentations reflect that. We show the statements in a different order here to make the logical structure visible: the statement of changes in equities is the full bridge between the two balance sheets, the cash flow statement decomposes the change in cash, and the income statement decomposes one line of the equities statement &mdash; net income.
-        </p>
       </div>
+      <p className="decomp-scroll-intro">
+        In practice, most people encounter the income statement first &mdash; it is what investors, managers, and analysts tend to care about most, and standard presentations reflect that. We show the statements in a different order here to make the logical structure visible: the statement of changes in equities is the full bridge between the two balance sheets, the cash flow statement decomposes the change in cash, and the income statement decomposes one line of the equities statement &mdash; net income.
+      </p>
       <div className="decomp-section decomp-sce">
         <h4>Statement of Changes in Equities</h4>
         <div className="decomp-line"><span>Opening equities</span><span className="dl-val">{fmt(0)}</span></div>
