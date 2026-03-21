@@ -1,22 +1,24 @@
 # iframe-testing
 
-Static embed of **reflect4** (minimal chrome) for OLI Torus **Webpage** blocks.
+Static pages (minimal chrome) for OLI Torus **Webpage** blocks.
 
-## Files
+## Pages
 
-- `reflect4.html` — main page
-- `shared.css`, `shared.js`, `config.js` — dependencies (same paths as the prework prototype)
+- `reflect4.html` — transaction sequencer
+- `module3.html` — Module 3 reading (accordions)
+
+Shared: `shared.css`, `shared.js`, `config.js`
 
 ## GitHub Pages
 
-1. Repo **Settings → Pages**
-2. **Build and deployment**: Source **Deploy from a branch**, branch **main**, folder **/ (root)**
-3. After deploy, open:
+1. Repo **Settings → Pages** → deploy from **`main`** / **`/(root)`**
+2. Examples:
 
-   `https://gaodeg-source.github.io/iframe-testing/reflect4.html`
-
-Use that URL in the Torus **Webpage** embed.
+   - `https://gaodeg-source.github.io/iframe-testing/reflect4.html`
+   - `https://gaodeg-source.github.io/iframe-testing/module3.html`
 
 ## Update
 
-Replace the four files with newer copies from your prototype and push to `main`.
+Copy updated HTML/JS/CSS from your prototype and push to `main`.
+
+**Note:** `module3.html` links to `entity-diagram.html` and `reflect3.html`. Those only work if you add those files to this repo (or change links to full URLs).
