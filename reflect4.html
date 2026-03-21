@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="reflect4-embed">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accounting Pre-Work</title>
 <link rel="stylesheet" href="shared.css">
 <style>
+  /* Fill the iframe / browser tab (embedded “whole page” layout) */
+  html.reflect4-embed,
+  html.reflect4-embed body {
+    height: 100%;
+    margin: 0;
+  }
+  html.reflect4-embed body {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
   .identity-bar {
     background: var(--primary);
     color: white;
@@ -373,11 +384,15 @@
     .accounts-grid { grid-template-columns: 1fr; }
   }
 
-  /* Wider column for the three-panel sequencer without site chrome */
+  /* Full width + at least one viewport tall inside the embed */
   .content.content-standalone {
-    max-width: 1200px;
-    padding-top: 24px;
-    padding-bottom: 40px;
+    max-width: none;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 16px clamp(16px, 4vw, 32px) 40px;
+    box-sizing: border-box;
   }
 </style>
 </head>
