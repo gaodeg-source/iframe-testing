@@ -5,20 +5,19 @@ Static pages (minimal chrome) for OLI Torus **Webpage** blocks.
 ## Pages
 
 - `reflect4.html` — transaction sequencer
-- `module3.html` — Module 3 reading (accordions)
+- `entity-diagram.html` — entity boundary interactive diagram
 
 Shared: `shared.css`, `shared.js`, `config.js`
 
 ## GitHub Pages
 
-1. Repo **Settings → Pages** → deploy from **`main`** / **`/(root)`**
-2. Examples:
+Deploy from **`main`** / **`/(root)`**, then for example:
 
-   - `https://gaodeg-source.github.io/iframe-testing/reflect4.html`
-   - `https://gaodeg-source.github.io/iframe-testing/module3.html`
+- `https://gaodeg-source.github.io/iframe-testing/reflect4.html`
+- `https://gaodeg-source.github.io/iframe-testing/entity-diagram.html`
 
 ## Update
 
-Copy updated HTML/JS/CSS from your prototype and push to `main`.
+Copy updated files from your prototype and push to `main`.
 
-**Note:** `module3.html` links to `entity-diagram.html` and `reflect3.html`. Those only work if you add those files to this repo (or change links to full URLs).
+**Note:** `entity-diagram.html` still links to `reflect2.html` and `module3.html`. Add those files to this repo or change links to full URLs if you need working navigation inside the embed.
