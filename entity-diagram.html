@@ -487,7 +487,7 @@ function EntityCircle({ highlight }) {
 function PartyCircle({ id, visible, active, highlight }) {
   const c = PARTIES[id];
   if (!c) return null;
-  const fill = highlight ? '#bd5319' : (active ? '#00329d' : '#b0c4d8');
+  const fill = highlight ? '#bd5319' : (active ? '#00329d' : '#6684C4');
   return (
     <g style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.5s' }}>
       <circle cx={c.cx} cy={c.cy} r={c.r} fill={fill} />
