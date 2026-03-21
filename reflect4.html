@@ -356,6 +356,20 @@
     font-family: 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.5;
   }
+  /* Tight group: Change in Equities row + intro directly underneath */
+  .decomp-equities-lead {
+    margin-bottom: 14px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e4e4e4;
+    background: #f8f8f8;
+  }
+  .decomp-equities-lead .decomp-scroll-intro {
+    margin: 0;
+    padding: 10px 12px 12px 12px;
+    border-top: 1px solid #dedede;
+    background: #f8f8f8;
+  }
 
   /* === PROGRESSIVE REVEAL === */
   .acct-line.acct-new {
@@ -684,13 +698,13 @@ function AccountsGrid({ accounts, prevAccounts, revealedAccounts, newAccounts, a
 }
 
 // ===== DECOMPOSITION TRACKER =====
-function ChangeSummary({ label, opening, closing }) {
+function ChangeSummary({ label, opening, closing, nestedInLead }) {
   const change = closing - opening;
   return (
     <div style={{
       fontFamily: "'Helvetica Neue', Arial, sans-serif", fontSize: 13, fontWeight: 600,
-      color: '#555', background: '#f8f8f8', borderRadius: 4, padding: '8px 12px',
-      marginBottom: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+      color: '#555', background: '#f8f8f8', borderRadius: nestedInLead ? 0 : 4, padding: '8px 12px',
+      marginBottom: nestedInLead ? 0 : 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center'
     }}>
       <span>{label}</span>
       <span style={{ color: '#00356b' }}>{fmt(closing)} &minus; {fmt(opening)} = {fmt(change)}</span>
@@ -710,10 +724,12 @@ function DecompTracker({ isEntries, cfsEntries, sceEntries, netIncome, step, acc
   return (
     <div>
       {/* 1. Statement of Changes in Equities — the full bridge */}
-      <ChangeSummary label="Change in Equities" opening={0} closing={closingEquities} />
-      <p className="decomp-scroll-intro">
-        In practice, most people encounter the income statement first &mdash; it is what investors, managers, and analysts tend to care about most, and standard presentations reflect that. We show the statements in a different order here to make the logical structure visible: the statement of changes in equities is the full bridge between the two balance sheets, the cash flow statement decomposes the change in cash, and the income statement decomposes one line of the equities statement &mdash; net income.
-      </p>
+      <div className="decomp-equities-lead">
+        <ChangeSummary label="Change in Equities" opening={0} closing={closingEquities} nestedInLead />
+        <p className="decomp-scroll-intro">
+          In practice, most people encounter the income statement first &mdash; it is what investors, managers, and analysts tend to care about most, and standard presentations reflect that. We show the statements in a different order here to make the logical structure visible: the statement of changes in equities is the full bridge between the two balance sheets, the cash flow statement decomposes the change in cash, and the income statement decomposes one line of the equities statement &mdash; net income.
+        </p>
+      </div>
       <div className="decomp-section decomp-sce">
         <h4>Statement of Changes in Equities</h4>
         <div className="decomp-line"><span>Opening equities</span><span className="dl-val">{fmt(0)}</span></div>
