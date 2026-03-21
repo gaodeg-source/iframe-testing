@@ -394,20 +394,41 @@
     line-height: 1.5;
   }
 
+  /* Same desktop layout at all widths: horizontal scroll instead of reflow */
+  .reflect4-grid-wrap {
+    overflow-x: auto;
+    overflow-y: visible;
+    margin-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reflect4-fixed-min {
+    min-width: 920px;
+  }
+  .reflect4-layout .identity-bar {
+    flex-wrap: nowrap;
+  }
+
+  /* Narrow viewports: slightly larger type, no layout changes */
   @media (max-width: 900px) {
-    .main-grid {
-      grid-template-columns: 1fr;
+    .reflect4-layout .identity-bar {
+      font-size: 16px;
+      gap: 10px;
     }
-    .main-grid .bs-open  { grid-column: 1; grid-row: 1; }
-    .main-grid .txn-area { grid-column: 1; grid-row: 2; }
-    .main-grid .bs-close { grid-column: 1; grid-row: 3; }
-    .accounts-grid { grid-template-columns: 1fr 1fr 1fr; }
-    .identity-bar { font-size: 13px; gap: 8px; }
-    .identity-bar .id-num { font-size: 16px; min-width: 48px; }
-    .decomp-scroll-box { max-height: 280px; }
+    .reflect4-layout .identity-bar .id-num { font-size: 22px; min-width: 64px; }
+    .reflect4-layout .identity-bar .id-label { font-size: 11px; }
+    .reflect4-layout .acct-line { font-size: 14px; }
+    .reflect4-layout .acct-col h4 { font-size: 12px; }
+    .reflect4-layout .bs-col-header { font-size: 12px; }
+    .reflect4-layout .txn-card .txn-desc { font-size: 16px; }
+    .reflect4-layout .txn-effects { font-size: 14px; }
+    .reflect4-layout .decomp-line { font-size: 14px; }
+    .reflect4-layout .decomp-scroll-intro { font-size: 13px; }
   }
   @media (max-width: 580px) {
-    .accounts-grid { grid-template-columns: 1fr; }
+    .reflect4-layout .identity-bar .id-num { font-size: 24px; }
+    .reflect4-layout .acct-line { font-size: 15px; }
+    .reflect4-layout .txn-card .txn-desc { font-size: 17px; }
+    .reflect4-layout .decomp-line { font-size: 15px; }
   }
 
   /* Full width + at least one viewport tall inside the embed */
@@ -926,7 +947,7 @@ function TransactionSequencer() {
   const txnDisplayNum = stage.type === 'txn' ? txnsProcessed : null;
 
   return (
-    <div>
+    <div className="reflect4-layout">
       <p style={{ fontSize: 15, lineHeight: 1.7, color: '#555', marginBottom: 8 }}>
         Step through the first year of a new entity. Each transaction updates the identity and builds the financial statements from scratch.
       </p>
@@ -934,6 +955,8 @@ function TransactionSequencer() {
         Your responses are saved locally on your device.
       </p>
 
+      <div className="reflect4-grid-wrap">
+      <div className="reflect4-fixed-min">
       <TimelineSVG step={txnsProcessed} total={totalTxns} />
       <IdentityBar accounts={currentAccounts} />
 
@@ -1058,6 +1081,8 @@ function TransactionSequencer() {
           </div>
         </div>
       )}
+      </div>{/* /reflect4-fixed-min */}
+      </div>{/* /reflect4-grid-wrap */}
     </div>
   );
 }
