@@ -319,17 +319,17 @@
     overflow-y: auto;
     margin-top: 16px;
   }
-  /* Flush to top of scrollport (no parent padding-top gap for text to leak through) */
+  /* Full-width sticky header for the whole scroll panel */
   .decomp-scroll-head {
     position: sticky;
     top: 0;
     z-index: 5;
-    margin: 12px -16px 10px -16px;
+    margin: 0;
     padding: 16px 20px;
     background-color: #ffffff;
-    border: 1px solid #e4e4e4;
-    border-radius: 6px;
-    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.07);
     transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -711,9 +711,6 @@ function DecompTracker({ isEntries, cfsEntries, sceEntries, netIncome, step, acc
     <div>
       {/* 1. Statement of Changes in Equities — the full bridge */}
       <ChangeSummary label="Change in Equities" opening={0} closing={closingEquities} />
-      <div className="decomp-scroll-head">
-        <h3>Flow Statements &mdash; decomposing the change</h3>
-      </div>
       <p className="decomp-scroll-intro">
         In practice, most people encounter the income statement first &mdash; it is what investors, managers, and analysts tend to care about most, and standard presentations reflect that. We show the statements in a different order here to make the logical structure visible: the statement of changes in equities is the full bridge between the two balance sheets, the cash flow statement decomposes the change in cash, and the income statement decomposes one line of the equities statement &mdash; net income.
       </p>
@@ -1036,6 +1033,9 @@ function TransactionSequencer() {
       {/* === FLOW STATEMENTS (scrollable box below) === */}
       {txnsProcessed > 0 && (
         <div className="decomp-scroll-box">
+          <div className="decomp-scroll-head">
+            <h3>Flow Statements &mdash; decomposing the change</h3>
+          </div>
           <div className="decomp-scroll-body">
             <DecompTracker
               isEntries={isEntries}
