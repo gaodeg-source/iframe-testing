@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accounting Pre-Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css?v=2">
 <style>
   html.prework-standalone,
@@ -14,6 +17,13 @@
   html.prework-standalone body {
     min-height: 100vh;
     min-height: 100dvh;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  html.prework-standalone .prose,
+  html.prework-standalone .module-header,
+  html.prework-standalone .module-header h2,
+  html.prework-standalone .module-header .module-subtitle {
+    font-family: Inter, system-ui, sans-serif;
   }
   .content.content-standalone {
     max-width: none;
@@ -21,7 +31,7 @@
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
-    padding: 16px clamp(16px, 4vw, 32px) 40px;
+    padding: 0;
     box-sizing: border-box;
   }
 </style>
@@ -83,7 +93,7 @@
   if (!container) return;
 
   var summaryDiv = document.createElement('div');
-  summaryDiv.style.cssText = 'font-family: "Helvetica Neue", Arial, sans-serif; font-size: 13px; color: #888; margin-bottom: 24px; padding: 12px 16px; background: #f0f4f8; border-radius: 5px; display: flex; align-items: center; gap: 8px;';
+  summaryDiv.style.cssText = 'font-family: Inter, system-ui, sans-serif; font-size: 13px; color: #888; margin-bottom: 24px; padding: 12px 16px; background: #f0f4f8; border-radius: 5px; display: flex; align-items: center; gap: 8px;';
   var countSpan = document.createElement('span');
   countSpan.style.cssText = 'font-weight: 600; color: #00329d;';
   countSpan.id = 'entityReflectCount';
@@ -103,7 +113,7 @@
     if (saved[i] && saved[i].trim().length > 0) card.style.borderColor = '#22c55e';
 
     var num = document.createElement('div');
-    num.style.cssText = 'font-family: "Helvetica Neue", Arial, sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: #bd5319; margin-bottom: 8px;';
+    num.style.cssText = 'font-family: Inter, system-ui, sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: #bd5319; margin-bottom: 8px;';
     num.textContent = 'Prompt ' + (i + 1) + ' of ' + PROMPTS.length;
     card.appendChild(num);
 
@@ -113,7 +123,7 @@
     card.appendChild(text);
 
     var ta = document.createElement('textarea');
-    ta.style.cssText = 'width: 100%; min-height: 100px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 5px; font-family: Georgia, "Times New Roman", serif; font-size: 15px; line-height: 1.6; color: #2a2a2a; resize: vertical; box-sizing: border-box;';
+    ta.style.cssText = 'width: 100%; min-height: 100px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 5px; font-family: Inter, system-ui, sans-serif; font-size: 15px; line-height: 1.6; color: #2a2a2a; resize: vertical; box-sizing: border-box;';
     ta.placeholder = 'Write your response here...';
     ta.value = saved[i] || '';
 
