@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accounting Pre-Work</title>
 <link rel="stylesheet" href="shared.css?v=2">
+  <link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+/>
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap"
+  rel="stylesheet"
+/>
 <style>
   /* Fill the iframe / browser tab (embedded “whole page” layout) */
   html.reflect4-embed,
@@ -950,11 +963,19 @@ function TransactionSequencer() {
 
   return (
     <div className="reflect4-layout">
-      <p style={{ fontSize: 15, lineHeight: 1.7, color: '#555', marginBottom: 8 }}>
+      <p
+        style={{
+          fontFamily: 'Open Sans, sans-serif',
+          fontSize: '1rem',
+          lineHeight: 1.7,
+          color: '#555',
+          marginBottom: 8,
+        }}
+      >
         Step through the first year of a new entity. Each transaction updates the identity and builds the financial statements from scratch.
       </p>
       <p style={{ fontSize: 13, color: '#888', fontStyle: 'italic', marginBottom: 24, fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
-        Your responses are saved locally on your device.
+        
       </p>
 
       <div className="reflect4-grid-wrap">
