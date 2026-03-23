@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accounting Pre-Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css?v=2">
 <style>
   /* Arrow colors */
@@ -23,7 +26,7 @@
     align-items: center;
     gap: 12px;
     margin-bottom: 12px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
   }
   .stage-btn {
     background: var(--primary);
@@ -58,7 +61,7 @@
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     padding: 6px 14px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     font-size: 12px;
     color: #888;
     cursor: pointer;
@@ -98,7 +101,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     font-size: 12px;
     color: #888;
     margin-bottom: 8px;
@@ -147,7 +150,7 @@
     border: none;
     border-top: 1px solid #e0e0e0;
     padding: 10px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     font-size: 12px;
     color: #888;
     cursor: pointer;
@@ -168,6 +171,14 @@
   html.prework-standalone body {
     min-height: 100vh;
     min-height: 100dvh;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  /* shared.css uses Georgia / Helvetica on body & rabbit-hole; force Inter on this page */
+  html.prework-standalone .prose,
+  html.prework-standalone .rabbit-hole,
+  html.prework-standalone .rabbit-hole-trigger,
+  html.prework-standalone .rabbit-hole-body {
+    font-family: Inter, system-ui, sans-serif;
   }
   .content.content-standalone {
     max-width: none;
@@ -473,11 +484,11 @@ function EntityCircle({ highlight }) {
       )}
       <circle cx={ECX} cy={ECY} r={ER} fill="#00329d" />
       <text x={ECX} y={ECY - 8} textAnchor="middle" fill="white"
-        fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="22" fontWeight="300">
+        fontFamily="Inter, system-ui, sans-serif" fontSize="22" fontWeight="300">
         The Entity
       </text>
       <text x={ECX} y={ECY + 18} textAnchor="middle" fill="rgba(255,255,255,0.6)"
-        fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="12">
+        fontFamily="Inter, system-ui, sans-serif" fontSize="12">
         (boundary)
       </text>
     </g>
@@ -494,7 +505,7 @@ function PartyCircle({ id, visible, active, highlight }) {
       {c.label.map((ln, i) => (
         <text key={i} x={c.cx} y={c.cy + (i - (c.label.length - 1) / 2) * 14}
           textAnchor="middle" fill="white"
-          fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="11" fontWeight="600">
+          fontFamily="Inter, system-ui, sans-serif" fontSize="11" fontWeight="600">
           {ln}
         </text>
       ))}
@@ -612,7 +623,7 @@ function EntityDiagram() {
         maxWidth: '580px', width: '100%', margin: '16px auto 0',
         background: 'white', border: '1px solid #e0e0e0', borderRadius: '8px',
         padding: '20px 24px', minHeight: '120px',
-        fontFamily: "'Helvetica Neue', Arial, sans-serif"
+        fontFamily: "'Inter', system-ui, sans-serif"
       }}>
         <div style={{ fontSize: '11px', fontWeight: '600', textTransform: 'uppercase',
           letterSpacing: '0.4px', color: '#888', marginBottom: '8px' }}>
