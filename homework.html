@@ -17,7 +17,7 @@
 
   .hw-page {
     width: 100%;
-    max-width: 960px;
+    max-width: 880px;
     margin: 0 auto;
     padding: 32px 32px 60px;
     position: relative;
@@ -126,8 +126,8 @@
   .pdf-modal-window {
     background: white;
     border-radius: 10px;
-    width: min(90vw, 960px);
-    max-height: 90vh;
+    width: 80vw;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -161,22 +161,10 @@
     transition: filter 0.15s;
   }
   .pdf-modal-close:hover { filter: brightness(0.85); }
-  .pdf-modal-body {
+  .pdf-modal-frame {
     flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-    background: #f0f0f0;
-  }
-  .pdf-modal-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 3px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    display: block;
+    border: none;
+    width: 100%;
   }
 
   /* ===== PROBLEM TEXT ===== */
@@ -219,7 +207,7 @@
   .answer-key-btn.showing:hover { background: #15803d; }
 
   /* ===== ARTICULATION LAYOUT ===== */
-  .art-new-wrap { background: #e6e9f2; padding: 16px 16px 24px; }
+  .art-new-wrap { background: #e6e9f2; border: 2px solid #222; padding: 16px 16px 24px; }
   .art-new-title {
     font-family: Inter, system-ui, sans-serif;
     font-size: 22px;
@@ -229,18 +217,31 @@
     padding: 4px 0 16px;
   }
   .art-period-row { display: flex; justify-content: space-between; margin-bottom: 0; }
-  .period-badge { background: none; color: #555; font-family: Inter, sans-serif; font-size: 12px; font-weight: 600; padding: 0 4px 8px; letter-spacing: 0.2px; }
+  .period-badge { background: #00329d; color: white; font-family: Inter, sans-serif; font-size: 12px; font-weight: 500; padding: 5px 14px; }
 
-  /* CSS Grid — L/R columns get equal 1fr; middle column shrinks to min-content */
+  /* CSS Grid — 3 columns, rows auto */
   .art-grid {
     display: grid;
-    grid-template-columns: 1fr min-content 1fr;
+    grid-template-columns: 22% 1fr 22%;
+    position: relative;
   }
-  /* Dashed panel overlays — removed, hidden */
-  .col-overlay { display: none; }
+  /* Dashed panel borders as absolute overlays */
+  .art-grid::before, .art-grid::after {
+    content: '';
+    position: absolute;
+    top: 0; height: 100%;
+    width: 22%;
+    border: 2px dashed #00329d;
+    pointer-events: none;
+    z-index: 2;
+    box-sizing: border-box;
+  }
+  .art-grid::before { left: 0; }
+  .art-grid::after  { right: 0; }
 
   /* Grid cells */
-  .ag { padding: 8px 10px; box-sizing: border-box; z-index: 1; }
+  /* Grid cells */
+  .ag { padding: 10px 14px; box-sizing: border-box; z-index: 1; }
   .ag-l { grid-column: 1; }
   .ag-r { grid-column: 3; }
   /* Band cells */
@@ -255,45 +256,41 @@
     padding: 6px 12px;
   }
 
-  /* Rotated = separator between sections */
+  /* Rotated = separator between sections — tall padding creates wider gap */
   .bs-sep-eq {
     display: flex; align-items: center; justify-content: center;
-    padding: 14px 0;
+    padding: 20px 0;
   }
   .bs-sep-eq > span {
     display: inline-block;
     transform: rotate(90deg);
-    font-size: 22px; font-weight: 700; color: #00329d; line-height: 1;
+    font-size: 28px; font-weight: 700; color: #00329d; line-height: 1;
   }
 
   /* Cell backgrounds for band rows vs white rows */
-  .cell-gray       { background: rgba(204,204,204,0.25); }
-  .cell-gray-step  { background: white; transition: background 0.25s ease; }   /* step-gated grey */
-  .cell-gray-step.band-active { background: rgba(204,204,204,0.25); }
+  .cell-gray  { background: rgba(204,204,204,0.25); }
   .cell-white { background: white; }
 
   /* Middle band cells (gray band rows, grid-column 2) */
   .ag-m-band {
     grid-column: 2;
-    background: transparent;          /* starts invisible; activated in step 2 */
-    transition: background 0.25s ease;
+    background: rgba(204,204,204,0.25);
     display: flex;
     align-items: center;
-    padding: 8px 10px;
+    padding: 10px 14px;
     box-sizing: border-box;
     z-index: 1;
   }
-  .ag-m-band.band-active { background: rgba(204,204,204,0.25); }
-  /* Fixed-width lead (+) — must match .flow-spacer for NI column alignment */
+  /* Fixed-width lead (+) so primary boxes align with flow column boxes */
   .flow-lead {
-    width: 36px; text-align: center;
-    font-size: 22px; font-weight: 700; color: #00329d;
+    width: 44px; text-align: center;
+    font-size: 28px; font-weight: 700; color: #00329d;
     flex-shrink: 0; line-height: 1;
   }
-  .flow-spacer { width: 36px; flex-shrink: 0; }
-  /* Body: tight left-aligned layout */
-  .flow-body { flex: 1; display: flex; align-items: center; gap: 8px; }
-  .flow-secondary { display: flex; align-items: center; gap: 6px; }
+  .flow-spacer { width: 44px; flex-shrink: 0; }
+  /* Body: tight left-aligned layout, no space-between gap */
+  .flow-body { flex: 1; display: flex; align-items: center; gap: 10px; }
+  .flow-secondary { display: flex; align-items: center; gap: 8px; }
   .flow-item-v { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 
   /* Middle flow column spans rows 3–7 (between the two gray band rows) */
@@ -302,10 +299,10 @@
     grid-row: 3 / 8;
     display: flex; flex-direction: column;
     justify-content: space-around;
-    padding: 6px 10px; box-sizing: border-box; z-index: 1;
+    padding: 8px 14px; box-sizing: border-box; z-index: 1;
   }
-  .flow-row-aligned { display: flex; align-items: center; width: 100%; gap: 6px; }
-  /* Connector row: spacer keeps <>/= aligned with NI column */
+  .flow-row-aligned { display: flex; align-items: center; width: 100%; gap: 8px; }
+  /* Connector row: spacer keeps <> aligned with NI column */
   .flow-conn-row { display: flex; align-items: center; }
 
   .bs-hdr {
@@ -326,7 +323,7 @@
   }
   .bs-label { font-family: Inter, sans-serif; font-size: 12px; color: #111; flex: 1; line-height: 1.3; }
   .bs-input {
-    width: 76px; height: 26px;
+    width: 90px; height: 28px;
     border: 1px solid #c7c7c7; background: white;
     font-family: Inter, sans-serif; font-size: 11px;
     text-align: center; padding: 2px 4px;
@@ -337,11 +334,11 @@
   .bs-input.correct   { border-color: #16a34a; background: #f0fdf4; }
   .bs-input.incorrect { border-color: #dc2626; background: #fef2f2; }
   .bs-input.answered  { background: #fefce8; border-color: #a16207; }
-  .bs-sep { font-family: Inter, sans-serif; font-size: 22px; font-weight: 700; color: #00329d; text-align: center; padding: 14px 0; line-height: 1; }
+  .bs-sep { font-family: Inter, sans-serif; font-size: 28px; font-weight: 700; color: #00329d; text-align: center; padding: 20px 0; line-height: 1; }
   .flow-item-inline { display: flex; flex-direction: column; align-items: center; gap: 3px; }
   .flow-label { font-family: Inter, sans-serif; font-size: 11px; color: #111; text-align: center; line-height: 1.3; }
-  .flow-op-lg { font-family: Inter, sans-serif; font-size: 22px; font-weight: 700; color: #00329d; line-height: 1; flex-shrink: 0; }
-  .flow-op-pm { font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; color: #00329d; flex-shrink: 0; }
+  .flow-op-lg { font-family: Inter, sans-serif; font-size: 28px; font-weight: 700; color: #00329d; line-height: 1; flex-shrink: 0; }
+  .flow-op-pm { font-family: Inter, sans-serif; font-size: 18px; font-weight: 700; color: #00329d; flex-shrink: 0; }
   .flow-conn { font-family: Inter, sans-serif; font-size: 22px; font-weight: 700; color: #00329d; text-align: center; letter-spacing: 2px; display: inline-block; transform: rotate(90deg); }
   .flow-dblbar { font-size: 16px; font-weight: 700; color: #00329d; text-align: center; letter-spacing: 3px; }
   .flow-row-inner { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
@@ -596,271 +593,6 @@
   col.c-op     { width: 26px; }
   col.c-tl     { width: 17%; }
 
-  /* ===== STEP SYSTEM ===== */
-  .step-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    margin-bottom: 14px;
-  }
-  .step-node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-  .step-circle {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 2px solid #c5c8d4;
-    background: white;
-    display: flex; align-items: center; justify-content: center;
-    font-family: Inter, sans-serif;
-    font-size: 13px; font-weight: 700;
-    color: #888;
-    transition: background 0.3s, border-color 0.3s, color 0.3s;
-  }
-  .step-circle.active  { background: #00329d; border-color: #00329d; color: white; }
-  .step-circle.done    { background: #16a34a; border-color: #16a34a; color: white; }
-  .step-label {
-    font-family: Inter, sans-serif;
-    font-size: 10px; color: #666;
-    white-space: nowrap; text-align: center;
-  }
-  .step-connector {
-    width: 56px; height: 2px;
-    background: #c5c8d4;
-    margin-bottom: 18px;
-    transition: background 0.3s;
-  }
-  .step-connector.done { background: #16a34a; }
-  .step-desc-text {
-    font-family: Inter, sans-serif;
-    font-size: 13px; color: #444;
-    text-align: center;
-    margin: 0 0 16px;
-  }
-  /* Hide/reveal without layout shift */
-  .step-content-hidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-  .step-content-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transition: opacity 0.4s ease;
-  }
-  /* Step controls */
-  .step-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
-  .check-btn {
-    background: #00329d; color: white;
-    border: none; border-radius: 6px;
-    padding: 11px 28px;
-    font-family: Inter, system-ui, sans-serif;
-    font-size: 14px; font-weight: 600;
-    cursor: pointer; transition: background 0.15s;
-    letter-spacing: 0.2px;
-  }
-  .check-btn:hover { background: #286dc0; }
-  .next-btn {
-    background: #16a34a; color: white;
-    border: none; border-radius: 6px;
-    padding: 11px 28px;
-    font-family: Inter, system-ui, sans-serif;
-    font-size: 14px; font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s, opacity 0.2s;
-    letter-spacing: 0.2px;
-  }
-  .next-btn:hover:not(:disabled) { background: #15803d; }
-  .next-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-  .back-btn {
-    background: white; color: #444;
-    border: 1.5px solid #c5c8d4;
-    border-radius: 6px;
-    padding: 11px 22px;
-    font-family: Inter, system-ui, sans-serif;
-    font-size: 14px; font-weight: 600;
-    cursor: pointer;
-    transition: border-color 0.15s, color 0.15s;
-    letter-spacing: 0.2px;
-  }
-  .back-btn:hover { border-color: #00329d; color: #00329d; }
-  /* Locked fields after a step is passed */
-  .bs-input.locked {
-    background: #f3f4f6 !important;
-    color: #555 !important;
-    border-color: #d1d5db !important;
-    pointer-events: none;
-  }
-  /* Auto-propagated Net Income fields */
-  .bs-input.auto-filled {
-    background: #eff6ff !important;
-    border-color: #93c5fd !important;
-    color: #1e40af !important;
-    pointer-events: none;
-  }
-
-  /* ===== PHASE BAR ===== */
-  .phase-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    margin-bottom: 22px;
-  }
-  .phase-pill {
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: 2px solid #c5c8d4;
-    background: white;
-    transition: all 0.3s;
-    cursor: default;
-  }
-  .phase-pill.active  { border-color: #00329d; background: #eff6ff; }
-  .phase-pill.done    { border-color: #16a34a; background: #f0fdf4; }
-  .phase-num {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: #c5c8d4;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; color: white;
-    flex-shrink: 0; transition: background 0.3s;
-  }
-  .phase-pill.active  .phase-num { background: #00329d; }
-  .phase-pill.done    .phase-num { background: #16a34a; }
-  .phase-text { font-family: Inter, sans-serif; font-size: 12px; color: #666; line-height: 1.3; }
-  .phase-text strong { display: block; font-size: 13px; color: #333; font-weight: 600; }
-  .phase-pill.active .phase-text strong { color: #00329d; }
-  .phase-pill.done   .phase-text strong { color: #16a34a; }
-  .phase-arrow {
-    width: 36px; height: 2px; background: #c5c8d4;
-    display: flex; align-items: center; justify-content: flex-end;
-    margin: 0 2px;
-    transition: background 0.3s;
-    position: relative;
-  }
-  .phase-arrow.done { background: #16a34a; }
-  .phase-arrow::after {
-    content: '';
-    position: absolute; right: -1px;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    border-left: 6px solid #c5c8d4;
-    transition: border-left-color 0.3s;
-  }
-  .phase-arrow.done::after { border-left-color: #16a34a; }
-
-  /* ===== LAYER / STEP BAR ===== */
-  .layer-bar-label {
-    font-family: Inter, sans-serif;
-    font-size: 10px; font-weight: 700; color: #888;
-    text-align: center; letter-spacing: 0.8px; text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  /* ===== EXPLAIN SYSTEM ===== */
-  .explain-wrap {
-    margin: 0 0 14px;
-    display: flex; flex-direction: column; align-items: center;
-  }
-  .why-btn {
-    background: none; border: 1.5px solid #93c5fd;
-    color: #2563eb; border-radius: 14px;
-    padding: 4px 14px; font-family: Inter, sans-serif;
-    font-size: 12px; font-weight: 600; cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-    display: inline-flex; align-items: center; gap: 5px;
-  }
-  .why-btn:hover { background: #eff6ff; border-color: #3b82f6; }
-  .why-btn .why-icon { font-size: 14px; font-weight: 700; }
-  .explain-panel {
-    display: none;
-    margin-top: 10px;
-    background: #f0f9ff;
-    border: 1px solid #bae6fd;
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-family: Inter, sans-serif;
-    font-size: 13px; color: #1e3a5f; line-height: 1.7;
-    max-width: 640px;
-    text-align: left;
-  }
-  .explain-panel.open { display: block; }
-  .explain-panel strong { color: #1d4ed8; }
-
-  /* ===== RELATIONSHIP HIGHLIGHT ===== */
-  .bs-input.related {
-    border-color: #f59e0b !important;
-    background: #fffbeb !important;
-    box-shadow: 0 0 0 2px rgba(245,158,11,0.25) !important;
-  }
-
-  /* ===== PHASE-COMPLETE BANNER ===== */
-  .phase-done-banner {
-    display: none;
-    background: #f0fdf4;
-    border: 1.5px solid #86efac;
-    border-radius: 10px;
-    padding: 18px 22px;
-    margin-top: 22px;
-    font-family: Inter, sans-serif;
-  }
-  .phase-done-banner.show { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .phase-done-text { flex: 1; }
-  .phase-done-text h3 { margin: 0 0 4px; font-size: 15px; color: #14532d; font-weight: 700; }
-  .phase-done-text p  { margin: 0; font-size: 13px; color: #166534; line-height: 1.6; }
-  .phase-continue-btn {
-    background: #00329d; color: white;
-    border: none; border-radius: 6px;
-    padding: 10px 22px;
-    font-family: Inter, system-ui, sans-serif;
-    font-size: 14px; font-weight: 600; cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
-  .phase-continue-btn:hover { background: #286dc0; }
-
-  /* ===== TRANSFER REFLECTION ===== */
-  .transfer-banner {
-    display: none;
-    background: #faf5ff;
-    border: 1.5px solid #d8b4fe;
-    border-radius: 10px;
-    padding: 18px 22px;
-    margin-top: 22px;
-    font-family: Inter, sans-serif;
-  }
-  .transfer-banner.show { display: block; }
-  .transfer-banner h3 { margin: 0 0 8px; font-size: 15px; color: #4c1d95; font-weight: 700; }
-  .transfer-banner p  { margin: 0 0 10px; font-size: 13px; color: #5b21b6; line-height: 1.6; }
-  .transfer-textarea {
-    width: 100%; box-sizing: border-box;
-    border: 1.5px solid #c4b5fd; border-radius: 6px;
-    padding: 10px 12px; font-family: Inter, sans-serif;
-    font-size: 13px; color: #1a1a1a; line-height: 1.6;
-    resize: vertical; min-height: 80px; outline: none;
-    background: white;
-  }
-  .transfer-textarea:focus { border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124,58,237,0.15); }
-
-  /* ===== COMPANY SUBTITLE ===== */
-  .art-company-sub {
-    text-align: center;
-    font-family: Inter, sans-serif;
-    font-size: 13px; color: #666;
-    margin: -10px 0 12px;
-    font-style: italic;
-  }
-
   /* ===== SUBMIT BUTTON & RESULT BANNER ===== */
   .submit-row {
     display: flex;
@@ -915,7 +647,7 @@
 
     <!-- PDF thumbnail — top right corner -->
     <div class="pdf-thumb-wrap">
-      <button class="pdf-thumb-btn" onclick="togglePdf()" title="View Apple FY25 Q3 Financial Statements">
+      <button class="pdf-thumb-btn" onclick="openPdf()" title="View Apple FY25 Q3 Financial Statements">
         <div class="pdf-doc-icon">
           <span class="pdf-doc-icon-text">PDF</span>
           <div class="pdf-doc-lines">
@@ -940,51 +672,9 @@
     <button class="answer-key-btn" id="answerKeyBtn" onclick="toggleAnswerKey()">Answer Key</button>
   </div>
 
-  <!-- ===== PHASE BAR ===== -->
-  <div class="phase-bar">
-    <div class="phase-pill active" id="phase-pill-1">
-      <div class="phase-num" id="phase-num-1">1</div>
-      <div class="phase-text"><strong>Learn the Structure</strong>Simplified Example</div>
-    </div>
-    <div class="phase-arrow" id="phase-arrow-1"></div>
-    <div class="phase-pill" id="phase-pill-2">
-      <div class="phase-num" id="phase-num-2">2</div>
-      <div class="phase-text"><strong>Apply It</strong>Apple Inc.</div>
-    </div>
-  </div>
-
-  <!-- ===== LAYER PROGRESS BAR ===== -->
-  <div class="layer-bar-label" id="layer-bar-label">Layers</div>
-  <div class="step-bar">
-    <div class="step-node">
-      <div class="step-circle active" id="step-circle-1">1</div>
-      <div class="step-label">Structure</div>
-    </div>
-    <div class="step-connector" id="step-conn-1"></div>
-    <div class="step-node">
-      <div class="step-circle" id="step-circle-2">2</div>
-      <div class="step-label">Flow</div>
-    </div>
-    <div class="step-connector" id="step-conn-2"></div>
-    <div class="step-node">
-      <div class="step-circle" id="step-circle-3">3</div>
-      <div class="step-label">Decomposition</div>
-    </div>
-  </div>
-  <p class="step-desc-text" id="step-desc"></p>
-
-  <!-- ===== ON-DEMAND EXPLAIN ===== -->
-  <div class="explain-wrap">
-    <button class="why-btn" id="whyBtn" onclick="toggleExplain()">
-      <span class="why-icon">?</span> Why does this work?
-    </button>
-    <div class="explain-panel" id="explainPanel"></div>
-  </div>
-
   <!-- ===== ARTICULATION LAYOUT ===== -->
   <div class="art-new-wrap">
     <div class="art-new-title">Financial Statements Articulation</div>
-    <p class="art-company-sub" id="artCompanySub"></p>
 
     <!-- Period badges -->
     <div class="art-period-row">
@@ -1005,30 +695,28 @@
       </div>
 
       <!-- ROW 2: GRAY BAND — Cash Assets | + CFO + CFI = | Cash Assets -->
-      <div class="ag ag-l cell-gray-step" style="grid-row:2; display:flex; align-items:center; gap:8px;">
+      <div class="ag ag-l cell-gray" style="grid-row:2; display:flex; align-items:center; gap:8px;">
         <span class="bs-label">Cash Assets</span>
         <input class="bs-input" id="b-past-ca" type="text" placeholder="…">
       </div>
       <div class="ag-m-band" style="grid-row:2">
-        <div id="flow-band-row2-content" class="step-content-hidden" style="display:flex; align-items:center; width:100%;">
-          <span class="flow-lead">+</span>
-          <div class="flow-body">
+        <span class="flow-lead">+</span>
+        <div class="flow-body">
+          <div class="flow-item-v">
+            <span class="flow-label">Cash Flows From<br>Operations</span>
+            <input class="bs-input" id="b-cfo" type="text" placeholder="…">
+          </div>
+          <div class="flow-secondary">
+            <span class="flow-op-lg">+</span>
             <div class="flow-item-v">
-              <span class="flow-label">Cash Flows From<br>Operations</span>
-              <input class="bs-input" id="b-cfo" type="text" placeholder="…">
+              <span class="flow-label">Cash Flows<br>Investment &amp; Finance</span>
+              <input class="bs-input" id="b-cfi" type="text" placeholder="…">
             </div>
-            <div class="flow-secondary">
-              <span class="flow-op-lg">+</span>
-              <div class="flow-item-v">
-                <span class="flow-label">Cash Flows<br>Investment &amp; Finance</span>
-                <input class="bs-input" id="b-cfi" type="text" placeholder="…">
-              </div>
-              <span class="flow-op-lg">=</span>
-            </div>
+            <span class="flow-op-lg">=</span>
           </div>
         </div>
       </div>
-      <div class="ag ag-r cell-gray-step" style="grid-row:2; display:flex; align-items:center; gap:8px;">
+      <div class="ag ag-r cell-gray" style="grid-row:2; display:flex; align-items:center; gap:8px;">
         <span class="bs-label">Cash Assets</span>
         <input class="bs-input" id="b-curr-ca" type="text" placeholder="…">
       </div>
@@ -1039,40 +727,26 @@
         <input class="bs-input" id="b-past-nca" type="text" placeholder="…">
       </div>
       <!-- ag-flow: grid-row 3/8, spans rows 3,4,5,6,7 -->
-      <div class="ag-flow" id="flow-middle" style="opacity:0; pointer-events:none; transition: opacity 0.4s ease;">
-        <!-- = connector: spacer + 76px slot centered over NI axis -->
-        <div class="flow-conn-row">
+      <div class="ag-flow">
+        <div class="flow-row-aligned">
           <span class="flow-spacer"></span>
-          <span style="width:76px; display:flex; justify-content:center; align-items:center;">
-            <span class="flow-op-lg" style="transform:rotate(90deg);">=</span>
-          </span>
-        </div>
-        <!-- NI+Adj white box: spacer reduced by 14px, left-pad added back to extend white card leftward -->
-        <div style="display:flex; align-items:center;">
-          <span style="width:22px; flex-shrink:0;"></span>
-          <div style="background:white; padding:6px 10px 6px 14px; display:flex; align-items:center; gap:6px;">
-            <div class="flow-item-v">
-              <span class="flow-label">Net Income</span>
-              <input class="bs-input" id="b-ni-nca" type="text" placeholder="…">
-            </div>
-            <span class="flow-op-pm">+/&minus;</span>
-            <div class="flow-item-v">
-              <span class="flow-label">Adjustments</span>
-              <input class="bs-input" id="b-adj" type="text" placeholder="…">
-            </div>
+          <div class="flow-item-v">
+            <span class="flow-label">Net Income</span>
+            <input class="bs-input" id="b-ni-nca" type="text" placeholder="…">
+          </div>
+          <span class="flow-op-pm">+/&minus;</span>
+          <div class="flow-item-v">
+            <span class="flow-label">Adjustments</span>
+            <input class="bs-input" id="b-adj" type="text" placeholder="…">
           </div>
         </div>
-        <!-- <> connector: spacer + 76px slot centered over NI axis -->
         <div class="flow-conn-row">
           <span class="flow-spacer"></span>
-          <span style="width:76px; display:flex; justify-content:center; align-items:center;">
-            <span class="flow-conn">&lt;&gt;</span>
-          </span>
+          <span class="flow-conn">&lt;&gt;</span>
         </div>
-        <!-- IS white box: spacer reduced by 14px, left-pad added back to extend white card leftward -->
-        <div style="display:flex; align-items:center;">
-          <span style="width:22px; flex-shrink:0;"></span>
-          <div style="background:white; padding:6px 10px 6px 14px; display:flex; align-items:center; gap:6px;">
+        <div style="background:white; padding:8px 10px; box-sizing:border-box;">
+          <div class="flow-row-aligned">
+            <span class="flow-spacer"></span>
             <div class="flow-item-v">
               <span class="flow-label">Net Income</span>
               <input class="bs-input" id="b-ni-tl" type="text" placeholder="…">
@@ -1089,12 +763,9 @@
             </div>
           </div>
         </div>
-        <!-- <> connector: spacer + 76px slot centered over NI axis -->
         <div class="flow-conn-row">
           <span class="flow-spacer"></span>
-          <span style="width:76px; display:flex; justify-content:center; align-items:center;">
-            <span class="flow-conn">&lt;&gt;</span>
-          </span>
+          <span class="flow-conn">&lt;&gt;</span>
         </div>
       </div>
       <div class="ag ag-r cell-white" style="grid-row:3; display:flex; align-items:center; gap:8px;">
@@ -1135,30 +806,28 @@
       </div>
 
       <!-- ROW 8: GRAY BAND — Retained Earnings | + NI + Other = | Retained Earnings -->
-      <div class="ag ag-l cell-gray-step" style="grid-row:8; display:flex; align-items:center; gap:8px;">
+      <div class="ag ag-l cell-gray" style="grid-row:8; display:flex; align-items:center; gap:8px;">
         <span class="bs-label">Retained Earnings</span>
         <input class="bs-input" id="b-past-re" type="text" placeholder="…">
       </div>
       <div class="ag-m-band" style="grid-row:8">
-        <div id="flow-band-row8-content" class="step-content-hidden" style="display:flex; align-items:center; width:100%;">
-          <span class="flow-lead">+</span>
-          <div class="flow-body">
+        <span class="flow-lead">+</span>
+        <div class="flow-body">
+          <div class="flow-item-v">
+            <span class="flow-label">Net Income</span>
+            <input class="bs-input" id="b-ni-re" type="text" placeholder="…">
+          </div>
+          <div class="flow-secondary">
+            <span class="flow-op-lg">+</span>
             <div class="flow-item-v">
-              <span class="flow-label">Net Income</span>
-              <input class="bs-input" id="b-ni-re" type="text" placeholder="…">
+              <span class="flow-label">Other Changes</span>
+              <input class="bs-input" id="b-other" type="text" placeholder="…">
             </div>
-            <div class="flow-secondary">
-              <span class="flow-op-lg">+</span>
-              <div class="flow-item-v">
-                <span class="flow-label">Other Changes</span>
-                <input class="bs-input" id="b-other" type="text" placeholder="…">
-              </div>
-              <span class="flow-op-lg">=</span>
-            </div>
+            <span class="flow-op-lg">=</span>
           </div>
         </div>
       </div>
-      <div class="ag ag-r cell-gray-step" style="grid-row:8; display:flex; align-items:center; gap:8px;">
+      <div class="ag ag-r cell-gray" style="grid-row:8; display:flex; align-items:center; gap:8px;">
         <span class="bs-label">Retained Earnings</span>
         <input class="bs-input" id="b-curr-re" type="text" placeholder="…">
       </div>
@@ -1173,10 +842,6 @@
         <span class="bs-label">All Other Shareholders&rsquo; Equities</span>
         <input class="bs-input" id="b-curr-aoe" type="text" placeholder="…">
       </div>
-
-      <!-- Dashed border overlays — span all 9 rows (1–9) in their column -->
-      <div class="col-overlay" style="grid-column:1; grid-row:1/10;"></div>
-      <div class="col-overlay" style="grid-column:3; grid-row:1/10;"></div>
 
     </div><!-- /art-grid -->
 
@@ -1496,28 +1161,10 @@
     </table>
   </div><!-- /art-new-wrap -->
 
-  <!-- ===== STEP CONTROLS ===== -->
-  <div class="step-controls">
-    <button class="back-btn" id="backBtn" onclick="prevStep()" style="display:none">&larr; Back</button>
-    <button class="check-btn" id="checkBtn" onclick="checkStep()">Check Answer</button>
-    <button class="next-btn" id="nextBtn" onclick="nextStep()">Next &rarr;</button>
+  <!-- ===== SUBMIT ROW ===== -->
+  <div class="submit-row">
+    <button class="submit-btn" onclick="submitAnswers()">Submit</button>
     <div class="result-banner" id="resultBanner"></div>
-  </div>
-
-  <!-- ===== PHASE 1 COMPLETE ===== -->
-  <div class="phase-done-banner" id="phaseDoneBanner">
-    <div class="phase-done-text">
-      <h3>Structure learned ✓</h3>
-      <p>You've completed the simplified example. The same structure — Assets = Liabilities + Equity, connected by Cash Flow and Income — applies to every company. Now apply it to <strong>Apple Inc.</strong></p>
-    </div>
-    <button class="phase-continue-btn" onclick="startPhase2()">Apply to Apple &rarr;</button>
-  </div>
-
-  <!-- ===== TRANSFER REFLECTION (after Phase 2) ===== -->
-  <div class="transfer-banner" id="transferBanner">
-    <h3>Reflect on the structure</h3>
-    <p>You've applied the same accounting structure to a real company. In your own words, describe how the Balance Sheet, Income Statement, and Cash Flow Statement connect to each other.</p>
-    <textarea class="transfer-textarea" placeholder="Write your reflection here…"></textarea>
   </div>
 
 </div><!-- /hw-page -->
@@ -1530,560 +1177,181 @@
       <span class="pdf-modal-title">Apple FY25 Q3 &mdash; Consolidated Financial Statements</span>
       <span style="width:14px;"></span>
     </div>
-    <div class="pdf-modal-body">
-      <img class="pdf-modal-img" src="apple-fy25-q3-p1.png" alt="Apple FY25 Q3 — Page 1">
-      <img class="pdf-modal-img" src="apple-fy25-q3-p2.png" alt="Apple FY25 Q3 — Page 2">
-      <img class="pdf-modal-img" src="apple-fy25-q3-p3.png" alt="Apple FY25 Q3 — Page 3">
-    </div>
+    <iframe
+      class="pdf-modal-frame"
+      id="pdfFrame"
+      src=""
+      title="Apple Financial Statements PDF">
+    </iframe>
   </div>
 </div>
 
 <script src="config.js?v=2"></script>
 <script src="shared.js"></script>
 <script>
+  // Apply site config (colors, etc.)
   if (typeof applyConfig === 'function') applyConfig();
 
-  // ===================================================================
-  // DATA: Phase 1 — simplified "ExampleCo" (round numbers, same structure)
-  // Verified: Past CA(10k) + CFO(6k) + CFI(-3k) = Curr CA(13k)
-  //           Past RE(5k) + NI(4k) + Other(-1k) = Curr RE(8k)
-  //           Rev(20k) - Exp(16k) = NI(4k);  CFO = NI(4k) + Adj(2k)
-  // ===================================================================
-  var PHASE_DATA = {
-    1: {
-      label: 'ExampleCo (Simplified)',
-      answers: {
-        'b-past-ca': '10,000', 'b-past-nca': '40,000', 'b-past-tl': '30,000',
-        'b-past-re': '5,000',  'b-past-aoe': '15,000',
-        'b-cfo':     '6,000',  'b-cfi':      '(3,000)',
-        'b-ni-re':   '4,000',  'b-other':    '(1,000)',
-        'b-ni-nca':  '4,000',  'b-ni-tl':    '4,000',
-        'b-adj':     '2,000',  'b-rev':      '20,000',  'b-exp':     '16,000',
-        'b-curr-ca': '13,000', 'b-curr-nca': '37,000',  'b-curr-tl': '28,000',
-        'b-curr-re': '8,000',  'b-curr-aoe': '14,000'
-      },
-      nums: {
-        'b-past-ca': 10000, 'b-past-nca': 40000, 'b-past-tl': 30000,
-        'b-past-re': 5000,  'b-past-aoe': 15000,
-        'b-cfo':     6000,  'b-cfi':      -3000,
-        'b-ni-re':   4000,  'b-other':    -1000,
-        'b-ni-nca':  4000,  'b-ni-tl':    4000,
-        'b-adj':     2000,  'b-rev':      20000,  'b-exp':     16000,
-        'b-curr-ca': 13000, 'b-curr-nca': 37000,  'b-curr-tl': 28000,
-        'b-curr-re': 8000,  'b-curr-aoe': 14000
-      }
-    },
-    2: {
-      label: 'Apple Inc. (FY2024)',
-      answers: {
-        'b-past-ca':  '29,943',  'b-past-nca': '335,037', 'b-past-tl':  '308,030',
-        'b-past-re':  '(19,154)','b-past-aoe': '76,104',
-        'b-cfo':      '81,754',  'b-cfi':      '(75,428)',
-        'b-ni-re':    '84,544',  'b-other':    '(82,997)',
-        'b-ni-nca':   '84,544',  'b-ni-tl':    '84,544',
-        'b-adj':      '(2,794)', 'b-rev':      '313,695',  'b-exp':     '229,151',
-        'b-curr-ca':  '36,269',  'b-curr-nca': '295,226',  'b-curr-tl': '265,665',
-        'b-curr-re':  '(17,607)','b-curr-aoe': '83,437'
-      },
-      nums: {
-        'b-past-ca':  29943,  'b-past-nca': 335037, 'b-past-tl':  308030,
-        'b-past-re':  -19154, 'b-past-aoe': 76104,
-        'b-cfo':      81754,  'b-cfi':      -75428,
-        'b-ni-re':    84544,  'b-other':    -82997,
-        'b-ni-nca':   84544,  'b-ni-tl':    84544,
-        'b-adj':      -2794,  'b-rev':      313695,  'b-exp':     229151,
-        'b-curr-ca':  36269,  'b-curr-nca': 295226,  'b-curr-tl': 265665,
-        'b-curr-re':  -17607, 'b-curr-aoe': 83437
-      }
-    }
+  // ===== ANSWER KEY DATA =====
+  var ANSWERS = {
+    'b-past-ca':  '29,943',
+    'b-past-nca': '335,037',
+    'b-past-tl':  '308,030',
+    'b-past-re':  '(19,154)',
+    'b-past-aoe': '76,104',
+    'b-cfo':      '81,754',
+    'b-ni-nca':   '84,544',
+    'b-ni-tl':    '84,544',
+    'b-ni-re':    '84,544',
+    'b-adj':      '(2,794)',
+    'b-cfi':      '(75,428)',
+    'b-rev':      '313,695',
+    'b-exp':      '229,151',
+    'b-other':    '(82,997)',
+    'b-curr-ca':  '36,269',
+    'b-curr-nca': '295,226',
+    'b-curr-tl':  '265,665',
+    'b-curr-re':  '(17,607)',
+    'b-curr-aoe': '83,437'
   };
 
-  // ===================================================================
-  // LAYER DEFINITIONS (same structure for both phases)
-  // ===================================================================
-  var STEP_FIELDS = {
-    1: ['b-past-ca','b-past-nca','b-past-tl','b-past-re','b-past-aoe',
-        'b-curr-ca','b-curr-nca','b-curr-tl','b-curr-re','b-curr-aoe'],
-    2: ['b-cfo','b-cfi','b-ni-re','b-other'],
-    3: ['b-rev','b-exp','b-adj']
-  };
-  var AUTO_FILL_NI = ['b-ni-nca','b-ni-tl'];
-
-  // ===================================================================
-  // CONCEPTUAL ERROR MESSAGES (relationship-focused)
-  // ===================================================================
-  var FIELD_ERRORS = {
-    'b-past-ca':  'Check Cash and Cash Equivalents on the <strong>past-period Balance Sheet</strong>.',
-    'b-curr-ca':  'Current Cash must equal: <strong>Past Cash + Cash from Operations + Cash from Investing &amp; Financing</strong>.',
-    'b-past-nca': 'Check Non-Cash Assets on the <strong>past-period Balance Sheet</strong>.',
-    'b-curr-nca': 'Check Non-Cash Assets on the <strong>current-period Balance Sheet</strong>.',
-    'b-past-tl':  'Check Total Liabilities on the <strong>past-period Balance Sheet</strong>.',
-    'b-curr-tl':  'Check Total Liabilities on the <strong>current-period Balance Sheet</strong>.',
-    'b-past-re':  'Check Retained Earnings on the <strong>past-period Balance Sheet</strong>.',
-    'b-curr-re':  'Current Retained Earnings must equal: <strong>Past RE + Net Income + Other Changes</strong>. This field connects the Income Statement to the Balance Sheet.',
-    'b-past-aoe': 'Check All Other Shareholders\u2019 Equity on the <strong>past-period Balance Sheet</strong>.',
-    'b-curr-aoe': 'Check All Other Shareholders\u2019 Equity on the <strong>current-period Balance Sheet</strong>.',
-    'b-cfo':      'Cash from Operations \u2248 Net Income \u00b1 Non-cash adjustments. Find it on the <strong>Statement of Cash Flows</strong>.',
-    'b-cfi':      'Cash from Investing &amp; Financing includes capex, borrowings, and dividends. Find it on the <strong>Statement of Cash Flows</strong>.',
-    'b-ni-re':    'Net Income here connects the <strong>Income Statement to Retained Earnings</strong>. Use the same Net Income from your Income Statement.',
-    'b-other':    'Other Changes in Retained Earnings include dividends paid and share repurchases. Find in <strong>Statement of Shareholders\u2019 Equity</strong>.',
-    'b-ni-nca':   'This Net Income must <strong>match the value from Retained Earnings</strong> \u2014 it\u2019s the same single number flowing across all three statements.',
-    'b-adj':      'Adjustments bridge Net Income to Cash from Operations. A common item is depreciation (non-cash expense added back). From the <strong>Statement of Cash Flows</strong>.',
-    'b-ni-tl':    'This Net Income must match across all equations \u2014 Revenue minus Expenses equals the <strong>same Net Income</strong> that appears in Retained Earnings.',
-    'b-rev':      'Revenue is total sales. Net Income = <strong>Revenue \u2212 Expenses</strong>. Find Revenue on the <strong>Income Statement</strong>.',
-    'b-exp':      'Expenses include all costs (COGS, operating, tax, interest). Net Income = Revenue \u2212 <strong>Expenses</strong>. Find on the <strong>Income Statement</strong>.'
+  // Canonical numeric answers for grading (key number only)
+  var ANSWER_NUMS = {
+    'b-past-ca':  29943,
+    'b-past-nca': 335037,
+    'b-past-tl':  308030,
+    'b-past-re':  -19154,
+    'b-past-aoe': 76104,
+    'b-cfo':      81754,
+    'b-ni-nca':   84544,
+    'b-ni-tl':    84544,
+    'b-ni-re':    84544,
+    'b-adj':      -2794,
+    'b-cfi':      -75428,
+    'b-rev':      313695,
+    'b-exp':      229151,
+    'b-other':    -82997,
+    'b-curr-ca':  36269,
+    'b-curr-nca': 295226,
+    'b-curr-tl':  265665,
+    'b-curr-re':  -17607,
+    'b-curr-aoe': 83437
   };
 
-  // ===================================================================
-  // RELATIONSHIP MAP (for cross-highlighting on focus)
-  // ===================================================================
-  var RELATED_MAP = {
-    'b-ni-re':   ['b-ni-nca','b-ni-tl'],
-    'b-ni-nca':  ['b-ni-re','b-ni-tl'],
-    'b-ni-tl':   ['b-ni-re','b-ni-nca'],
-    'b-past-ca': ['b-cfo','b-cfi','b-curr-ca'],
-    'b-curr-ca': ['b-past-ca','b-cfo','b-cfi'],
-    'b-cfo':     ['b-past-ca','b-cfi','b-curr-ca','b-ni-nca','b-adj'],
-    'b-cfi':     ['b-past-ca','b-cfo','b-curr-ca'],
-    'b-past-re': ['b-ni-re','b-other','b-curr-re'],
-    'b-curr-re': ['b-past-re','b-ni-re','b-other'],
-    'b-other':   ['b-past-re','b-ni-re','b-curr-re'],
-    'b-rev':     ['b-ni-tl','b-exp'],
-    'b-exp':     ['b-ni-tl','b-rev'],
-    'b-adj':     ['b-cfo','b-ni-nca']
-  };
-
-  // ===================================================================
-  // LAYER EXPLANATIONS (on-demand)
-  // ===================================================================
-  var LAYER_EXPLAINS = {
-    1: {
-      1: '<strong>Layer 1: Structure</strong> \u2014 Every company\u2019s Balance Sheet follows one rule: <strong>Assets = Liabilities + Equity</strong>. Everything the company owns (assets) is funded either by borrowing (liabilities) or by owners (equity). The past and current periods show the same structure at two different points in time.',
-      2: '<strong>Layer 2: Flow</strong> \u2014 What connects the two Balance Sheets? Two flows:<br>\u2022 <strong>Cash Flow</strong>: Past Cash + Cash from Operations + Cash from Investing &amp; Finance = Current Cash.<br>\u2022 <strong>Equity Flow</strong>: Past Retained Earnings + Net Income + Other Changes = Current Retained Earnings.',
-      3: '<strong>Layer 3: Decomposition</strong> \u2014 Where does Net Income come from? The Income Statement: <strong>Revenue \u2212 Expenses = Net Income</strong>. And how does Net Income relate to Cash? Cash from Operations \u2248 Net Income \u00b1 Non-cash adjustments (e.g., depreciation adds back a non-cash expense).'
-    },
-    2: {
-      1: '<strong>Layer 1: Structure (Apple)</strong> \u2014 The same Assets = Liabilities + Equity equation holds for Apple\u2019s $500B+ balance sheet. The structure is identical \u2014 only the scale changes.',
-      2: '<strong>Layer 2: Flow (Apple)</strong> \u2014 Apple generated $81.8B in operating cash flows. Its retained earnings are negative (accumulated deficit) because Apple has returned more to shareholders than it has retained. The arithmetic is the same.',
-      3: '<strong>Layer 3: Decomposition (Apple)</strong> \u2014 Apple\u2019s $84.5B net income comes from $313.7B in revenue minus $229.2B in expenses. Notice that Cash from Operations ($81.8B) is slightly less than Net Income because adjustments are negative in this period.'
-    }
-  };
-
-  // ===================================================================
-  // STATE
-  // ===================================================================
-  var currentPhase = 1;
-  var currentStep  = 1;
-  var stepPassed   = { 1: false, 2: false, 3: false };
-  var explainOpen  = false;
   var answerKeyOpen = false;
 
-  // Derived shortcuts (updated when phase changes)
-  var ANSWERS, ANSWER_NUMS;
-  function loadPhaseData() {
-    ANSWERS     = PHASE_DATA[currentPhase].answers;
-    ANSWER_NUMS = PHASE_DATA[currentPhase].nums;
-  }
-
-  // ===================================================================
-  // INPUT NORMALIZATION
-  // ===================================================================
-  function normalizeInput(str) {
-    var s = (str || '').replace(/[\s,\n]/g, '');
-    s = s.replace(/\(([0-9.]+)\)/, '-$1');
-    var eqMatch = s.match(/=(-?[0-9]+(?:\.[0-9]+)?)$/);
-    if (eqMatch) return parseFloat(eqMatch[1]);
-    return parseFloat(s);
-  }
-
-  // ===================================================================
-  // PHASE UI
-  // ===================================================================
-  function updatePhaseUI() {
-    [1, 2].forEach(function(p) {
-      var pill  = document.getElementById('phase-pill-' + p);
-      var arrow = document.getElementById('phase-arrow-' + (p - 1));
-      pill.classList.remove('active','done');
-      if (p < currentPhase)       pill.classList.add('done');
-      else if (p === currentPhase) pill.classList.add('active');
-      if (arrow) arrow.classList.toggle('done', p <= currentPhase);
-    });
-
-    // Company subtitle inside the table
-    document.getElementById('artCompanySub').textContent =
-      PHASE_DATA[currentPhase].label;
-
-    // PDF thumbnail only relevant in Phase 2
-    var pdfWrap = document.querySelector('.pdf-thumb-wrap');
-    if (pdfWrap) pdfWrap.style.visibility = currentPhase === 2 ? 'visible' : 'hidden';
-
-    // Problem text visibility
-    var hwProblem = document.querySelector('.hw-problem');
-    if (hwProblem) hwProblem.style.display = currentPhase === 2 ? '' : 'none';
-  }
-
-  // ===================================================================
-  // LAYER / STEP UI
-  // ===================================================================
-  var LAYER_NAMES = { 1: 'Structure', 2: 'Flow', 3: 'Decomposition' };
-  var LAYER_DESCS = {
-    1: 'Layer 1: Structure \u2014 Assets = Liabilities + Equity. Fill in the Balance Sheet for both periods.',
-    2: 'Layer 2: Flow \u2014 How do values move between periods? Fill in the Cash Flow and Equity bridges.',
-    3: 'Layer 3: Decomposition \u2014 Where does Net Income come from? Fill in the Income Statement.'
-  };
-
-  function updateStepUI() {
-    for (var s = 1; s <= 3; s++) {
-      var circle = document.getElementById('step-circle-' + s);
-      var conn   = document.getElementById('step-conn-' + (s - 1));
-      circle.classList.remove('active','done');
-      if (s < currentStep)        circle.classList.add('done');
-      else if (s === currentStep) circle.classList.add('active');
-      if (conn) conn.classList.toggle('done', s <= currentStep);
-    }
-
-    document.getElementById('step-desc').textContent = LAYER_DESCS[currentStep];
-
-    var nextBtn  = document.getElementById('nextBtn');
-    var checkBtn = document.getElementById('checkBtn');
-    var backBtn  = document.getElementById('backBtn');
-
-    if (currentStep === 3) {
-      nextBtn.style.display = 'none';
-      checkBtn.textContent  = 'Check Answer';
-    } else {
-      nextBtn.style.display = '';
-      checkBtn.textContent  = 'Check Answer';
-    }
-    nextBtn.disabled = false;
-    backBtn.style.display = currentStep > 1 ? '' : 'none';
-
-    // Reset explain panel when layer changes
-    explainOpen = false;
-    var panel = document.getElementById('explainPanel');
-    if (panel) panel.classList.remove('open');
-    var whyBtn = document.getElementById('whyBtn');
-    if (whyBtn) whyBtn.querySelector('.why-icon').textContent = '?';
-
-    // Update explain content for current layer
-    var explains = LAYER_EXPLAINS[currentPhase];
-    var panel2 = document.getElementById('explainPanel');
-    if (panel2 && explains) panel2.innerHTML = explains[currentStep] || '';
-  }
-
-  // ===================================================================
-  // EXPLAIN TOGGLE
-  // ===================================================================
-  function toggleExplain() {
-    explainOpen = !explainOpen;
-    var panel  = document.getElementById('explainPanel');
-    var whyBtn = document.getElementById('whyBtn');
-    panel.classList.toggle('open', explainOpen);
-    whyBtn.querySelector('.why-icon').textContent = explainOpen ? '\u00d7' : '?';
-  }
-
-  // ===================================================================
-  // RELATIONSHIP HIGHLIGHTING
-  // ===================================================================
-  function attachRelationshipListeners() {
-    Object.keys(RELATED_MAP).forEach(function(id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      el.addEventListener('focus', function() {
-        clearRelated();
-        (RELATED_MAP[id] || []).forEach(function(relId) {
-          var relEl = document.getElementById(relId);
-          if (relEl) relEl.classList.add('related');
-        });
-      });
-      el.addEventListener('blur', function() { clearRelated(); });
-    });
-  }
-
-  function clearRelated() {
-    document.querySelectorAll('.bs-input.related').forEach(function(el) {
-      el.classList.remove('related');
-    });
-  }
-
-  // ===================================================================
-  // CHECK
-  // ===================================================================
-  function checkStep() {
-    var fields  = STEP_FIELDS[currentStep];
-    var allGood = true;
-    var firstWrong = null;
-
-    fields.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      el.classList.remove('correct','incorrect','answered');
-      var val = normalizeInput(el.value);
-      if (!isNaN(val) && val === ANSWER_NUMS[id]) {
-        el.classList.add('correct');
-      } else {
-        el.classList.add('incorrect');
-        allGood = false;
-        if (!firstWrong) firstWrong = id;
-      }
-    });
-
-    var banner = document.getElementById('resultBanner');
-    banner.classList.remove('all-correct','some-wrong','show');
-    banner.classList.add('show');
-
-    if (allGood) {
-      stepPassed[currentStep] = true;
-      lockFields(STEP_FIELDS[currentStep]);
-
-      if (currentStep < 3) {
-        banner.classList.add('all-correct');
-        banner.innerHTML = '\u2713 ' + LAYER_NAMES[currentStep] + ' correct! Click <strong>Next \u2192</strong> to continue.';
-      } else {
-        // Completed all 3 layers for this phase
-        banner.classList.add('all-correct');
-        if (currentPhase === 1) {
-          banner.innerHTML = '\u2713 All three layers complete! You\u2019ve learned the structure.';
-          document.getElementById('phaseDoneBanner').classList.add('show');
-        } else {
-          banner.innerHTML = '\u2713 Complete! You\u2019ve applied the same structure to Apple Inc.';
-          document.getElementById('transferBanner').classList.add('show');
-        }
-      }
-    } else {
-      banner.classList.add('some-wrong');
-      // Show conceptual error for first wrong field
-      var errMsg = firstWrong && FIELD_ERRORS[firstWrong]
-        ? FIELD_ERRORS[firstWrong]
-        : 'Some values are incorrect (highlighted in red).';
-      banner.innerHTML = errMsg;
-    }
-    updateStepUI();
-  }
-
-  // ===================================================================
-  // NEXT LAYER
-  // ===================================================================
-  function nextStep() {
-    if (currentStep >= 3) return;
-    currentStep++;
-
-    if (currentStep === 2) {
-      revealContent('flow-band-row2-content');
-      revealContent('flow-band-row8-content');
-      activateBands();
-    } else if (currentStep === 3) {
-      var niRaw = document.getElementById('b-ni-re').value;
-      AUTO_FILL_NI.forEach(function(id) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        el.value = niRaw;
-        el.readOnly = true;
-        el.classList.add('auto-filled');
-        el.classList.remove('correct','incorrect');
-      });
-      revealElement('flow-middle');
-    }
-
-    document.getElementById('resultBanner').classList.remove('show','all-correct','some-wrong');
-    updateStepUI();
-  }
-
-  // ===================================================================
-  // PREVIOUS LAYER
-  // ===================================================================
-  function prevStep() {
-    if (currentStep <= 1) return;
-    var leaving = currentStep;
-    currentStep--;
-
-    if (leaving === 2) {
-      hideContent('flow-band-row2-content');
-      hideContent('flow-band-row8-content');
-      deactivateBands();
-    } else if (leaving === 3) {
-      hideElement('flow-middle');
-      AUTO_FILL_NI.forEach(function(id) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        el.value = '';
-        el.readOnly = false;
-        el.classList.remove('auto-filled','correct','incorrect');
-      });
-    }
-
-    unlockFields(STEP_FIELDS[currentStep]);
-    document.getElementById('resultBanner').classList.remove('show','all-correct','some-wrong');
-    updateStepUI();
-  }
-
-  // ===================================================================
-  // PHASE 2 TRANSITION
-  // ===================================================================
-  function startPhase2() {
-    currentPhase = 2;
-    currentStep  = 1;
-    stepPassed   = { 1: false, 2: false, 3: false };
-
-    loadPhaseData();
-
-    // Clear all inputs
-    var allFields = STEP_FIELDS[1].concat(STEP_FIELDS[2]).concat(STEP_FIELDS[3]).concat(AUTO_FILL_NI);
-    allFields.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      el.value = '';
-      el.readOnly = false;
-      el.classList.remove('correct','incorrect','answered','locked','auto-filled');
-    });
-
-    // Reset visual state
-    hideContent('flow-band-row2-content');
-    hideContent('flow-band-row8-content');
-    deactivateBands();
-    hideElement('flow-middle');
-
-    document.getElementById('phaseDoneBanner').classList.remove('show');
-    document.getElementById('resultBanner').classList.remove('show','all-correct','some-wrong');
-    answerKeyOpen = false;
-    var btn = document.getElementById('answerKeyBtn');
-    if (btn) { btn.textContent = 'Answer Key'; btn.classList.remove('showing'); }
-
-    updatePhaseUI();
-    updateStepUI();
-
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // ===================================================================
-  // DOM HELPERS
-  // ===================================================================
-  function revealContent(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.classList.remove('step-content-hidden');
-    el.classList.add('step-content-visible');
-  }
-
-  function hideContent(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.classList.remove('step-content-visible');
-    el.classList.add('step-content-hidden');
-  }
-
-  function revealElement(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.pointerEvents = 'auto';
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() { el.style.opacity = '1'; });
-    });
-  }
-
-  function hideElement(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.pointerEvents = 'none';
-  }
-
-  function lockFields(fields) {
-    fields.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) { el.classList.add('locked'); el.readOnly = true; }
-    });
-  }
-
-  function unlockFields(fields) {
-    fields.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) { el.classList.remove('locked','correct','incorrect'); el.readOnly = false; }
-    });
-  }
-
-  function activateBands() {
-    document.querySelectorAll('.cell-gray-step').forEach(function(el) { el.classList.add('band-active'); });
-    document.querySelectorAll('.ag-m-band').forEach(function(el) { el.classList.add('band-active'); });
-  }
-
-  function deactivateBands() {
-    document.querySelectorAll('.cell-gray-step').forEach(function(el) { el.classList.remove('band-active'); });
-    document.querySelectorAll('.ag-m-band').forEach(function(el) { el.classList.remove('band-active'); });
-  }
-
-  // ===================================================================
-  // ANSWER KEY (instructor / review mode — respects current phase)
-  // ===================================================================
   function toggleAnswerKey() {
     answerKeyOpen = !answerKeyOpen;
     var btn = document.getElementById('answerKeyBtn');
     btn.textContent = answerKeyOpen ? 'Hide Answers' : 'Answer Key';
     btn.classList.toggle('showing', answerKeyOpen);
 
-    var visibleFields = [];
-    for (var s = 1; s <= currentStep; s++) visibleFields = visibleFields.concat(STEP_FIELDS[s]);
-    if (currentStep >= 3) visibleFields = visibleFields.concat(AUTO_FILL_NI);
-
-    visibleFields.forEach(function(id) {
+    Object.keys(ANSWERS).forEach(function(id) {
       var el = document.getElementById(id);
       if (!el) return;
       if (answerKeyOpen) {
         el.value = ANSWERS[id];
         el.classList.add('answered');
-        el.classList.remove('correct','incorrect');
-        el.readOnly = false;
-        el.classList.remove('locked','auto-filled');
+        el.classList.remove('correct', 'incorrect');
       } else {
         el.value = '';
         el.classList.remove('answered');
       }
     });
+    // Hide result banner when toggling answer key
     document.getElementById('resultBanner').classList.remove('show');
   }
 
-  // ===================================================================
-  // HINT SYSTEM (unchanged)
-  // ===================================================================
+  // ===== SUBMIT & CHECK =====
+  function normalizeInput(str) {
+    // Strip whitespace, commas, newlines; convert (N) to -N
+    var s = str.replace(/[\s,\n]/g, '');
+    s = s.replace(/\(([0-9.]+)\)/, '-$1');
+    // If they typed a full calculation like "313,695-84,544=229,151" extract the last number
+    var eqMatch = s.match(/=(-?[0-9]+)$/);
+    if (eqMatch) return parseFloat(eqMatch[1]);
+    return parseFloat(s);
+  }
+
+  function submitAnswers() {
+    var correct = 0, total = 0, wrong = [];
+    Object.keys(ANSWER_NUMS).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      total++;
+      el.classList.remove('correct', 'incorrect', 'answered');
+      var val = normalizeInput(el.value);
+      if (!isNaN(val) && val === ANSWER_NUMS[id]) {
+        el.classList.add('correct');
+        correct++;
+      } else {
+        el.classList.add('incorrect');
+        wrong.push(id);
+      }
+    });
+
+    var banner = document.getElementById('resultBanner');
+    banner.classList.remove('all-correct', 'some-wrong');
+    banner.classList.add('show');
+    if (correct === total) {
+      banner.classList.add('all-correct');
+      banner.textContent = '✓ All ' + total + ' answers correct!';
+    } else {
+      banner.classList.add('some-wrong');
+      banner.textContent = correct + ' / ' + total + ' correct — ' + (total - correct) + ' incorrect (highlighted in red).';
+    }
+  }
+
+  // ===== HINT SYSTEM =====
   function toggleHint(e, id) {
     e.stopPropagation();
     var popup = document.getElementById(id);
     if (!popup) return;
+    // Hints are intentionally blank for now.
     popup.textContent = '';
     var isHidden = popup.classList.contains('hidden');
-    document.querySelectorAll('.hint-popup').forEach(function(p) { p.classList.add('hidden'); });
+    // Close all hints
+    document.querySelectorAll('.hint-popup').forEach(function(p) {
+      p.classList.add('hidden');
+    });
+    // Toggle the clicked one
     if (isHidden) popup.classList.remove('hidden');
   }
+
+  // Close hints when clicking elsewhere
   document.addEventListener('click', function() {
-    document.querySelectorAll('.hint-popup').forEach(function(p) { p.classList.add('hidden'); });
+    document.querySelectorAll('.hint-popup').forEach(function(p) {
+      p.classList.add('hidden');
+    });
   });
 
-  // ===================================================================
-  // PDF MODAL
-  // ===================================================================
-  function togglePdf() {
-    var modal  = document.getElementById('pdfModal');
-    var isOpen = modal.classList.toggle('open');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  // ===== PDF MODAL =====
+  var PDF_SRC = 'file:///Users/gaogaode/Downloads/45-700Topic2Homework%20APPLE%20FY25_Q3_Consolidated_Financial_Statements.pdf';
+
+  function openPdf() {
+    var frame = document.getElementById('pdfFrame');
+    if (!frame.src || frame.src === window.location.href) {
+      frame.src = PDF_SRC;
+    }
+    document.getElementById('pdfModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
+
   function closePdf() {
     document.getElementById('pdfModal').classList.remove('open');
     document.body.style.overflow = '';
   }
+
+
+
   function closePdfOutside(e) {
     if (e.target === document.getElementById('pdfModal')) closePdf();
   }
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePdf(); });
 
-  // ===================================================================
-  // INIT
-  // ===================================================================
-  loadPhaseData();
-  attachRelationshipListeners();
-  updatePhaseUI();
-  updateStepUI();
+  // Close PDF modal on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePdf();
+  });
 </script>
 </body>
 </html>
