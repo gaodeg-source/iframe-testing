@@ -96,12 +96,14 @@ body {
 .item-value {
   font-variant-numeric: tabular-nums;
   font-weight: 500; color: #111; white-space: nowrap;
+  /* Fixed padding matches .hl so row height never shifts */
+  padding: 1px 7px;
+  border-radius: 4px;
 }
 
 /* Highlighted changed value */
 .item-value.hl {
   background: #dbeafe; color: #1d4ed8;
-  border-radius: 4px; padding: 1px 7px;
   font-weight: 700;
 }
 
