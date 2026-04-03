@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Balance Sheet Identity — Activity 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background: #e6e9f2;
-  font-family: Inter, system-ui, sans-serif;
+  font-family: 'Open Sans', system-ui, sans-serif;
   color: #111;
   min-height: 100vh;
   width: 100%;
@@ -146,9 +146,13 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   width: 100%;
 }
+.mc-q-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px;
+}
 .mc-q {
   font-size: clamp(13px, 1.6vw, 15px); font-weight: 600;
-  color: #111; margin-bottom: 16px; line-height: 1.5;
+  color: #111; line-height: 1.5; flex: 1;
 }
 .mc-opts { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
 
@@ -192,7 +196,7 @@ body {
 .btn-back {
   background: white; color: #555; border: 1.5px solid #d1d5db;
   border-radius: 6px; padding: 10px 20px;
-  font-family: Inter, sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Open Sans', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
   cursor: pointer; transition: border-color 0.15s, color 0.15s;
 }
 .btn-back:hover { border-color: #00329d; color: #00329d; }
@@ -200,7 +204,7 @@ body {
 .btn-check {
   background: #00329d; color: white; border: none;
   border-radius: 6px; padding: 10px 22px;
-  font-family: Inter, sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Open Sans', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
   cursor: pointer; transition: background 0.15s; display: none;
 }
 .btn-check:hover  { background: #1a4db5; }
@@ -209,7 +213,7 @@ body {
 .btn-next {
   background: #16a34a; color: white; border: none;
   border-radius: 6px; padding: 10px 22px;
-  font-family: Inter, sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Open Sans', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
   cursor: pointer; transition: background 0.15s; display: none;
 }
 .btn-next:hover { background: #15803d; }
@@ -219,6 +223,15 @@ body {
   font-size: clamp(13px, 1.4vw, 15px); font-weight: 600; color: #1d4ed8; display: none;
 }
 .next-page-hint.show { display: inline-block; }
+
+.btn-hint {
+  background: white; color: #7c3aed; border: 1.5px solid #c4b5fd;
+  border-radius: 6px; padding: 7px 16px;
+  font-family: 'Open Sans', sans-serif; font-size: clamp(11px, 1.2vw, 12px); font-weight: 600;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s;
+}
+.btn-hint:hover { background: #f5f3ff; border-color: #7c3aed; }
+.btn-hint:disabled { opacity: 0.45; cursor: default; }
 
 /* ── Responsive ───────────────────────────────────── */
 @media (max-width: 600px) {
@@ -274,11 +287,14 @@ body {
     <div class="step-header">
       <div class="step-tag">Step 2 of 5</div>
       <h2 class="step-title">The numbers changed</h2>
-      <p class="step-desc">The closing balance sheet now shows updated figures. Values that changed in the <strong>Assets</strong> section are highlighted.</p>
+      <p class="step-desc">The closing balance sheet now shows updated figures. Look at the <strong>Assets</strong> section and answer the question below.</p>
     </div>
     <div id="grid2"></div>
     <div class="mc-card">
-      <div class="mc-q">What is the change in Total Assets from opening to closing?</div>
+      <div class="mc-q-row">
+        <div class="mc-q">What is the change in Total Assets from opening to closing?</div>
+        <button class="btn-hint" id="hint2" onclick="showHint(2)">Hint</button>
+      </div>
       <div class="mc-opts" id="mc2">
         <div class="mc-opt"><div class="mc-letter">A</div>+6,000</div>
         <div class="mc-opt" data-correct="true"><div class="mc-letter">B</div>+11,000</div>
@@ -301,11 +317,14 @@ body {
     <div class="step-header">
       <div class="step-tag">Step 3 of 5</div>
       <h2 class="step-title">Now look at Liabilities</h2>
-      <p class="step-desc">Same balance sheets. Values that changed in the <strong>Liabilities</strong> section are highlighted.</p>
+      <p class="step-desc">Same balance sheets. Look at the <strong>Liabilities</strong> section and answer the question below.</p>
     </div>
     <div id="grid3"></div>
     <div class="mc-card">
-      <div class="mc-q">What is the change in Total Liabilities from opening to closing?</div>
+      <div class="mc-q-row">
+        <div class="mc-q">What is the change in Total Liabilities from opening to closing?</div>
+        <button class="btn-hint" id="hint3" onclick="showHint(3)">Hint</button>
+      </div>
       <div class="mc-opts" id="mc3">
         <div class="mc-opt"><div class="mc-letter">A</div>+11,000</div>
         <div class="mc-opt"><div class="mc-letter">B</div>+5,000</div>
@@ -328,11 +347,14 @@ body {
     <div class="step-header">
       <div class="step-tag">Step 4 of 5</div>
       <h2 class="step-title">Now look at Equities</h2>
-      <p class="step-desc">Same balance sheets. Only <strong>Retained Earnings</strong> changed — it is highlighted in the closing column.</p>
+      <p class="step-desc">Same balance sheets. Look at the <strong>Equities</strong> section and answer the question below.</p>
     </div>
     <div id="grid4"></div>
     <div class="mc-card">
-      <div class="mc-q">What is the change in Total Equities from opening to closing?</div>
+      <div class="mc-q-row">
+        <div class="mc-q">What is the change in Total Equities from opening to closing?</div>
+        <button class="btn-hint" id="hint4" onclick="showHint(4)">Hint</button>
+      </div>
       <div class="mc-opts" id="mc4">
         <div class="mc-opt"><div class="mc-letter">A</div>+11,000</div>
         <div class="mc-opt"><div class="mc-letter">B</div>+6,000</div>
@@ -377,7 +399,10 @@ body {
       </div>
     </div>
     <div class="mc-card">
-      <div class="mc-q">Based only on these two balance sheets, what caused these changes?</div>
+      <div class="mc-q-row">
+        <div class="mc-q">Based only on these two balance sheets, what caused these changes?</div>
+        <button class="btn-hint" id="hint5" onclick="showHint(5)">Hint</button>
+      </div>
       <div class="mc-opts" id="mc5">
         <div class="mc-opt"><div class="mc-letter">A</div>The company earned a profit</div>
         <div class="mc-opt"><div class="mc-letter">B</div>The company borrowed money from a bank</div>
@@ -403,13 +428,13 @@ var C = { cash:58000, nca:92000, loan:56000, cs:60000, re:34000 };
 function fmt(n) { return n.toLocaleString('en-US'); }
 
 // ── BALANCE SHEET RENDERER ────────────────────────────────────
-// highlight: null | 'assets' | 'liab' | 'equity'
+// highlight: null | 'assets' | 'liab' | 'equity' | 'all'
 // Only the closing column ever gets highlights.
-// For 'equity', ONLY Retained Earnings is highlighted (CS didn't change).
+// Only the Total row value is highlighted (not individual line items).
 function buildColumn(data, isClose, highlight) {
-  var ha  = isClose && highlight === 'assets';
-  var hl  = isClose && highlight === 'liab';
-  var hre = isClose && highlight === 'equity'; // RE + total only
+  var ha  = isClose && (highlight === 'assets' || highlight === 'all');
+  var hl  = isClose && (highlight === 'liab'   || highlight === 'all');
+  var hte = isClose && (highlight === 'equity' || highlight === 'all');
 
   var totalA = data.cash + data.nca;
   var totalL = data.loan;
@@ -422,22 +447,22 @@ function buildColumn(data, isClose, highlight) {
   return (
     '<div class="bs-section">'
     + '<div class="bs-section-title">Assets</div>'
-    + '<div class="bs-item"><span class="item-label">Cash Assets</span>'        + v(data.cash, ha) + '</div>'
-    + '<div class="bs-item"><span class="item-label">Non-Cash Assets</span>'    + v(data.nca,  ha) + '</div>'
+    + '<div class="bs-item"><span class="item-label">Cash Assets</span>'        + v(data.cash, false) + '</div>'
+    + '<div class="bs-item"><span class="item-label">Non-Cash Assets</span>'    + v(data.nca,  false) + '</div>'
     + '<div class="bs-item total-row"><span class="item-label">Total Assets</span>' + v(totalA, ha) + '</div>'
     + '</div>'
 
     + '<div class="bs-section">'
     + '<div class="bs-section-title">Liabilities</div>'
-    + '<div class="bs-item"><span class="item-label">Bank Loan</span>'          + v(data.loan, hl) + '</div>'
+    + '<div class="bs-item"><span class="item-label">Bank Loan</span>'          + v(data.loan, false) + '</div>'
     + '<div class="bs-item total-row"><span class="item-label">Total Liabilities</span>' + v(totalL, hl) + '</div>'
     + '</div>'
 
     + '<div class="bs-section">'
     + '<div class="bs-section-title">Equities</div>'
     + '<div class="bs-item"><span class="item-label">Contributed Capital</span>' + v(data.cs,  false) + '</div>'
-    + '<div class="bs-item"><span class="item-label">Retained Earnings</span>'  + v(data.re,  hre)   + '</div>'
-    + '<div class="bs-item total-row"><span class="item-label">Total Equities</span>' + v(totalE, hre) + '</div>'
+    + '<div class="bs-item"><span class="item-label">Retained Earnings</span>'  + v(data.re,  false) + '</div>'
+    + '<div class="bs-item total-row"><span class="item-label">Total Equities</span>' + v(totalE, hte) + '</div>'
     + '</div>'
   );
 }
@@ -456,12 +481,21 @@ function buildGrid(containerId, openData, closeData, highlight) {
     + '</div>';
 }
 
-// Render all grids once
-buildGrid('grid1', O, O, null);      // Screen 1: identical, no highlight
-buildGrid('grid2', O, C, 'assets');  // Screen 2: assets highlighted
-buildGrid('grid3', O, C, 'liab');    // Screen 3: liabilities highlighted
-buildGrid('grid4', O, C, 'equity');  // Screen 4: RE + total equities highlighted
-buildGrid('grid5', O, C, null);      // Screen 5: no highlight, full comparison
+// Render all grids — screens 2-5 start with no highlight (hint reveals it)
+buildGrid('grid1', O, O, null);
+buildGrid('grid2', O, C, null);
+buildGrid('grid3', O, C, null);
+buildGrid('grid4', O, C, null);
+buildGrid('grid5', O, C, null);
+
+// Hint map: screen → highlight type
+var HINT_HL = { 2: 'assets', 3: 'liab', 4: 'equity', 5: 'all' };
+
+function showHint(screenNum) {
+  buildGrid('grid' + screenNum, O, C, HINT_HL[screenNum]);
+  var btn = document.getElementById('hint' + screenNum);
+  if (btn) { btn.textContent = 'Hint shown'; btn.disabled = true; }
+}
 
 // ── FEEDBACK MESSAGES ─────────────────────────────────────────
 var FB = {
