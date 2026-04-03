@@ -23,15 +23,15 @@ body {
 }
 
 /* ── Page header ──────────────────────────────────── */
-.page-title { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
-.page-sub   { font-size: clamp(12px, 1.5vw, 14px); color: #666; margin-bottom: 28px; }
+.page-title { font-size: clamp(22px, 3vw, 28px); font-weight: 700; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+.page-sub   { font-size: clamp(14px, 1.7vw, 16px); color: #666; margin-bottom: 28px; }
 
 /* ── Progress dots ────────────────────────────────── */
 .progress-row { display: flex; align-items: center; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
 .prog-dot { width: 10px; height: 10px; border-radius: 50%; background: #c5c8d4; transition: background 0.25s; flex-shrink: 0; }
 .prog-dot.active { background: #00329d; }
 .prog-dot.done   { background: #16a34a; }
-.prog-label      { font-size: 11px; color: #888; margin-left: 4px; }
+.prog-label      { font-size: 13px; color: #888; margin-left: 4px; }
 
 /* ── Screens ──────────────────────────────────────── */
 .screen { display: none; }
@@ -39,9 +39,9 @@ body {
 
 /* ── Step header (no card) ────────────────────────── */
 .step-header { margin-bottom: 24px; }
-.step-tag   { font-size: 10px; font-weight: 700; color: #888; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-.step-title { font-size: clamp(16px, 2vw, 20px); font-weight: 700; color: #111; margin-bottom: 6px; }
-.step-desc  { font-size: clamp(12px, 1.4vw, 14px); color: #555; line-height: 1.65; }
+.step-tag   { font-size: 12px; font-weight: 700; color: #888; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+.step-title { font-size: clamp(19px, 2.3vw, 23px); font-weight: 700; color: #111; margin-bottom: 6px; }
+.step-desc  { font-size: clamp(14px, 1.6vw, 16px); color: #555; line-height: 1.65; }
 
 /* ── Two-column layout ────────────────────────────── */
 .bs-two-col {
@@ -55,7 +55,7 @@ body {
 .bs-column { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 
 .bs-col-label {
-  font-size: clamp(11px, 1.3vw, 13px); font-weight: 700;
+  font-size: clamp(13px, 1.5vw, 15px); font-weight: 700;
   color: #374151; margin-bottom: 6px;
 }
 
@@ -81,7 +81,7 @@ body {
 }
 
 .bs-section-title {
-  font-size: 10px; font-weight: 700;
+  font-size: 12px; font-weight: 700;
   color: #00329d; letter-spacing: 0.8px;
   text-transform: uppercase; margin-bottom: 10px;
 }
@@ -89,7 +89,7 @@ body {
 /* ── Line items ───────────────────────────────────── */
 .bs-item {
   display: flex; justify-content: space-between; align-items: baseline;
-  padding: 4px 0; font-size: clamp(11px, 1.3vw, 13px);
+  padding: 4px 0; font-size: clamp(13px, 1.5vw, 15px);
 }
 
 .item-label { color: #374151; padding-right: 8px; }
@@ -122,17 +122,17 @@ body {
   margin-bottom: 24px; width: 100%;
 }
 .delta-box-label {
-  font-size: 10px; font-weight: 700; color: #00329d;
+  font-size: 12px; font-weight: 700; color: #00329d;
   letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 14px;
 }
 .delta-row {
   display: flex; align-items: baseline; gap: 10px;
-  font-size: clamp(12px, 1.4vw, 14px);
+  font-size: clamp(14px, 1.6vw, 16px);
   padding: 7px 0; border-bottom: 1px solid #f3f4f6; flex-wrap: wrap;
 }
 .delta-row:last-child { border-bottom: none; }
 .delta-name   { color: #374151; font-weight: 600; flex: 1; min-width: 120px; }
-.delta-calc   { color: #888; font-variant-numeric: tabular-nums; font-size: clamp(11px, 1.2vw, 13px); }
+.delta-calc   { color: #888; font-variant-numeric: tabular-nums; font-size: clamp(13px, 1.4vw, 15px); }
 .delta-result {
   background: #dbeafe; color: #1d4ed8;
   border-radius: 4px; padding: 1px 8px;
@@ -151,7 +151,7 @@ body {
   gap: 12px; margin-bottom: 16px;
 }
 .mc-q {
-  font-size: clamp(13px, 1.6vw, 15px); font-weight: 600;
+  font-size: clamp(15px, 1.8vw, 17px); font-weight: 600;
   color: #111; line-height: 1.5; flex: 1; margin-bottom: 16px;
 }
 .mc-q-row .mc-q { margin-bottom: 0; }
@@ -160,7 +160,7 @@ body {
 .mc-opt {
   border: 1.5px solid #e2e8f0; border-radius: 8px;
   padding: clamp(10px, 1.5vw, 13px) clamp(12px, 1.8vw, 16px);
-  cursor: pointer; font-size: clamp(12px, 1.4vw, 13px);
+  cursor: pointer; font-size: clamp(14px, 1.6vw, 15px);
   font-weight: 500; color: #333;
   display: flex; align-items: center; gap: 10px;
   transition: border-color 0.15s, background 0.15s;
@@ -174,7 +174,7 @@ body {
 
 .mc-letter {
   width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
-  border: 1.5px solid #c5c8d4; font-size: 11px; font-weight: 700; color: #888;
+  border: 1.5px solid #c5c8d4; font-size: 13px; font-weight: 700; color: #888;
   display: flex; align-items: center; justify-content: center; transition: all 0.15s;
 }
 .mc-opt.selected .mc-letter { background: #00329d; border-color: #00329d; color: white; }
@@ -184,7 +184,7 @@ body {
 /* ── Feedback ─────────────────────────────────────── */
 .feedback {
   border-radius: 8px; padding: 12px 16px;
-  font-size: clamp(12px, 1.4vw, 13px); line-height: 1.75;
+  font-size: clamp(14px, 1.6vw, 15px); line-height: 1.75;
   display: none; margin-bottom: 16px;
 }
 .feedback.show { display: block; }
@@ -197,7 +197,7 @@ body {
 .btn-back {
   background: white; color: #555; border: 1.5px solid #d1d5db;
   border-radius: 6px; padding: 10px 20px;
-  font-family: 'Inter', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(14px, 1.5vw, 15px); font-weight: 600;
   cursor: pointer; transition: border-color 0.15s, color 0.15s;
 }
 .btn-back:hover { border-color: #00329d; color: #00329d; }
@@ -205,7 +205,7 @@ body {
 .btn-check {
   background: #00329d; color: white; border: none;
   border-radius: 6px; padding: 10px 22px;
-  font-family: 'Inter', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(14px, 1.5vw, 15px); font-weight: 600;
   cursor: pointer; transition: background 0.15s; display: none;
 }
 .btn-check:hover  { background: #1a4db5; }
@@ -214,21 +214,21 @@ body {
 .btn-next {
   background: #16a34a; color: white; border: none;
   border-radius: 6px; padding: 10px 22px;
-  font-family: 'Inter', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(14px, 1.5vw, 15px); font-weight: 600;
   cursor: pointer; transition: background 0.15s; display: none;
 }
 .btn-next:hover { background: #15803d; }
 .btn-next.show  { display: inline-block; }
 
 .next-page-hint {
-  font-size: clamp(13px, 1.4vw, 15px); font-weight: 600; color: #1d4ed8; display: none;
+  font-size: clamp(15px, 1.6vw, 17px); font-weight: 600; color: #1d4ed8; display: none;
 }
 .next-page-hint.show { display: inline-block; }
 
 .btn-hint {
   background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe;
   border-radius: 6px; padding: 7px 16px;
-  font-family: 'Inter', sans-serif; font-size: clamp(11px, 1.2vw, 12px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(13px, 1.4vw, 14px); font-weight: 600;
   cursor: pointer; transition: background 0.15s, border-color 0.15s; white-space: nowrap;
 }
 .btn-hint:hover { background: #dbeafe; border-color: #93c5fd; }
