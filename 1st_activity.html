@@ -101,8 +101,8 @@ body {
   border-radius: 4px;
 }
 
-/* Highlighted changed value */
-.item-value.hl {
+/* Highlighted changed value — only visible when .hint-active is on the grid */
+.hint-active .item-value.hl {
   background: #dbeafe; color: #1d4ed8;
   font-weight: 700;
 }
@@ -425,7 +425,7 @@ body {
 var O = { cash:40000, nca:80000, loan:50000, cs:60000, re:10000 };
 var C = { cash:58000, nca:92000, loan:56000, cs:60000, re:34000 };
 
-function fmt(n) { return n.toLocaleString('en-US'); }
+function fmt(n) { return '$' + n.toLocaleString('en-US'); }
 
 // ── BALANCE SHEET RENDERER ────────────────────────────────────
 // highlight: null | 'assets' | 'liab' | 'equity' | 'all'
@@ -481,32 +481,21 @@ function buildGrid(containerId, openData, closeData, highlight) {
     + '</div>';
 }
 
-// Render all grids — screens 2-5 start with no highlight (hint reveals it)
+// Render grids with highlight classes baked in.
+// Highlights are hidden by CSS until .hint-active is added to the grid div.
 buildGrid('grid1', O, O, null);
-buildGrid('grid2', O, C, null);
-buildGrid('grid3', O, C, null);
-buildGrid('grid4', O, C, null);
-buildGrid('grid5', O, C, null);
+buildGrid('grid2', O, C, 'assets');
+buildGrid('grid3', O, C, 'liab');
+buildGrid('grid4', O, C, 'equity');
+buildGrid('grid5', O, C, 'all');
 
-// Hint map: screen → highlight type
-var HINT_HL    = { 2: 'assets', 3: 'liab', 4: 'equity', 5: 'all' };
-var hintShown  = {};   // tracks which screens have had hint revealed
-
+// showHint: just reveal pre-rendered highlights — no DOM re-creation needed.
+// The .hint-active class stays on the div permanently, so navigating away
+// and back never hides the hint again.
 function showHint(screenNum) {
-  hintShown[screenNum] = true;
-  var hl = HINT_HL[screenNum];
-  // Screen 1 grid is identical (O,O); screens 2-5 compare O vs C
-  buildGrid('grid' + screenNum, O, C, hl);
+  document.getElementById('grid' + screenNum).classList.add('hint-active');
   var btn = document.getElementById('hint' + screenNum);
   if (btn) { btn.textContent = 'Hint shown'; btn.disabled = true; }
-}
-
-function applyHintState(screenNum) {
-  if (hintShown[screenNum]) {
-    buildGrid('grid' + screenNum, O, C, HINT_HL[screenNum]);
-    var btn = document.getElementById('hint' + screenNum);
-    if (btn) { btn.textContent = 'Hint shown'; btn.disabled = true; }
-  }
 }
 
 // ── FEEDBACK MESSAGES ─────────────────────────────────────────
@@ -599,7 +588,6 @@ function goTo(n) {
     else if (i === n) d.classList.add('active');
   }
   document.getElementById('progLabel').textContent = 'Step ' + n + ' of 5';
-  applyHintState(n);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
