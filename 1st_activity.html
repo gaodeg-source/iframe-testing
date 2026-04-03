@@ -8,144 +8,125 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #eef0f6; font-family: Inter, system-ui, sans-serif; color: #111; }
 
-.page { max-width: 820px; margin: 0 auto; padding: 36px 24px 80px; }
+body {
+  background: #e6e9f2;
+  font-family: Inter, system-ui, sans-serif;
+  color: #111;
+  min-height: 100vh;
+}
 
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 36px 28px 80px;
+}
+
+/* ── Page header ─────────────────────────────── */
 .page-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
 .page-sub   { font-size: 13px; color: #666; margin-bottom: 28px; }
 
-/* Progress dots */
-.progress-row { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; }
-.prog-dot { width: 10px; height: 10px; border-radius: 50%; background: #d1d5db; transition: background 0.25s; }
+/* ── Progress dots ───────────────────────────── */
+.progress-row { display: flex; align-items: center; gap: 8px; margin-bottom: 36px; }
+.prog-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #c5c8d4; transition: background 0.25s;
+}
 .prog-dot.active { background: #00329d; }
 .prog-dot.done   { background: #16a34a; }
 .prog-label { font-size: 11px; color: #888; margin-left: 4px; }
 
-/* Screens */
+/* ── Screens ─────────────────────────────────── */
 .screen { display: none; }
 .screen.active { display: block; }
 
-/* Card wrapper */
-.card {
-  background: white; border-radius: 12px; padding: 24px 26px;
-  margin-bottom: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+/* ── Step header (no card) ───────────────────── */
+.step-header { margin-bottom: 24px; }
+.step-tag {
+  font-size: 10px; font-weight: 700; color: #888;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  margin-bottom: 6px;
 }
-.card-tag   { font-size: 10px; font-weight: 700; color: #888; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-.card-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-.card-desc  { font-size: 13px; color: #555; line-height: 1.6; }
+.step-title { font-size: 19px; font-weight: 700; color: #111; margin-bottom: 5px; }
+.step-desc  { font-size: 13px; color: #555; line-height: 1.65; }
 
-/* =============================================
-   BALANCE SHEET — matching simplified-example
-   ============================================= */
-.bs-wrap {
-  background: #e6e9f2;
-  padding: 14px 14px 18px;
-  border-radius: 8px;
-  margin-top: 18px;
-}
-.bs-period-row {
-  display: flex; justify-content: space-between;
-  margin-bottom: 0;
-}
-.period-badge {
-  font-size: 12px; font-weight: 600; color: #555; padding: 0 4px 8px;
-}
-/* Two-column grid — mirrors simplified-example's art-grid without middle col */
-.bs-grid {
+/* ── Two-column BS layout ────────────────────── */
+.bs-two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
-/* Each content cell — mirrors .ag.cell-white */
-.bs-cell {
-  background: white;
-  padding: 8px 10px;
-}
-/* Separator cells */
-.bs-sep-cell {
-  background: white;
-  display: flex; align-items: center; justify-content: center;
-  padding: 10px 0;
-}
-.bs-sep-eq-sym {
-  display: inline-block;
-  transform: rotate(90deg);
-  font-size: 22px; font-weight: 700; color: #00329d; line-height: 1;
-}
-.bs-plus-sym {
-  font-size: 22px; font-weight: 700; color: #00329d; line-height: 1;
+  gap: 48px;
+  margin-bottom: 32px;
 }
 
-/* Exact styles from simplified-example */
-.bs-hdr  { font-size: 12px; font-weight: 700; color: #00329d; letter-spacing: 0.3px; margin-bottom: 5px; }
-.bs-line { height: 1px; background: #999; margin-bottom: 10px; border: none; }
-.bs-row  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
-.bs-label { font-size: 12px; color: #111; flex: 1; line-height: 1.3; }
+.bs-column { display: flex; flex-direction: column; gap: 14px; }
 
-/* Value display (replacing bs-input) */
-.bs-val {
-  width: 72px; font-size: 11px; text-align: right;
-  font-variant-numeric: tabular-nums; flex-shrink: 0;
-  font-weight: 500; color: #111; padding: 2px 4px;
+.bs-col-label {
+  font-size: 12px; font-weight: 700; color: #374151;
+  letter-spacing: 0.2px; padding-bottom: 2px;
 }
-/* Blue highlight for changed values — same tone as simplified-example's auto-filled */
-.bs-val.hl {
-  background: #dbeafe;
-  color: #1d4ed8;
-  border-radius: 4px;
+
+/* ── Section cards ───────────────────────────── */
+.bs-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.bs-section-title {
+  font-size: 10px; font-weight: 700;
+  color: #00329d; letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.bs-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 5px 0; font-size: 13px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.bs-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.item-label { color: #374151; }
+.item-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500; color: #111;
+}
+/* Blue highlight for changed values */
+.item-value.hl {
+  background: #dbeafe; color: #1d4ed8;
+  border-radius: 4px; padding: 1px 7px;
   font-weight: 700;
-  text-align: center;
 }
 
-/* Equation display */
-.eq-box {
-  background: #f8fafc; border: 1px solid #e2e8f0;
-  border-radius: 8px; padding: 16px 20px; margin-bottom: 18px;
+/* ── MC question card ────────────────────────── */
+.mc-card {
+  background: white; border-radius: 12px;
+  padding: 24px 26px; margin-bottom: 18px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
-.eq-box-label { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 12px; }
-.eq-formula { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
-.eq-term {
-  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 5px;
-  padding: 4px 12px; font-size: 14px; font-weight: 700; color: #1d4ed8;
+.mc-q {
+  font-size: 15px; font-weight: 600; color: #111;
+  margin-bottom: 16px; line-height: 1.5;
 }
-.eq-sym { font-size: 18px; font-weight: 700; color: #94a3b8; }
-.eq-check-row {
-  display: flex; align-items: baseline; gap: 10px;
-  font-size: 13px; color: #374151; margin-bottom: 6px;
-}
-.eq-check-row:last-child { margin-bottom: 0; }
-.eq-period-lbl { font-size: 11px; font-weight: 600; color: #888; min-width: 64px; }
-.eq-nums { font-variant-numeric: tabular-nums; }
-.eq-result { font-weight: 700; color: #00329d; }
-.eq-ok { color: #16a34a; font-size: 14px; margin-left: 2px; }
+.mc-opts { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
 
-/* Delta summary */
-.delta-box {
-  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
-  padding: 14px 20px; margin-bottom: 18px;
-}
-.delta-box-label { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; }
-.delta-row { display: flex; align-items: baseline; gap: 10px; font-size: 13px; margin-bottom: 7px; }
-.delta-row:last-child { margin-bottom: 0; }
-.delta-name { color: #374151; font-weight: 600; min-width: 160px; }
-.delta-calc { color: #777; font-variant-numeric: tabular-nums; }
-.delta-result { background: #eff6ff; color: #1d4ed8; border-radius: 4px; padding: 1px 8px; font-weight: 700; font-variant-numeric: tabular-nums; }
-
-/* Multiple choice */
-.mc-card { background: white; border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
-.mc-q { font-size: 15px; font-weight: 600; color: #111; margin-bottom: 14px; line-height: 1.5; }
-.mc-opts { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
 .mc-opt {
-  border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 12px 16px;
-  cursor: pointer; font-size: 13px; font-weight: 500; color: #333;
+  border: 1.5px solid #e2e8f0; border-radius: 8px;
+  padding: 12px 16px; cursor: pointer;
+  font-size: 13px; font-weight: 500; color: #333;
   display: flex; align-items: center; gap: 10px;
-  transition: border-color 0.15s, background 0.15s; user-select: none;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
 }
 .mc-opt:hover:not(.locked) { border-color: #94a3b8; background: #f8fafc; }
 .mc-opt.selected { border-color: #00329d; background: #eff6ff; color: #00329d; }
 .mc-opt.correct  { border-color: #16a34a !important; background: #f0fdf4 !important; color: #14532d !important; }
 .mc-opt.wrong    { border-color: #dc2626 !important; background: #fef2f2 !important; color: #991b1b !important; }
 .mc-opt.locked   { cursor: default; pointer-events: none; }
+/* show correct answer in amber when student didn't pick it */
+.mc-opt.reveal   { border-color: #f59e0b !important; background: #fffbeb !important; color: #92400e !important; }
+
 .mc-letter {
   width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
   border: 1.5px solid #c5c8d4; font-size: 11px; font-weight: 700; color: #888;
@@ -154,45 +135,94 @@ body { background: #eef0f6; font-family: Inter, system-ui, sans-serif; color: #1
 .mc-opt.selected .mc-letter { background: #00329d; border-color: #00329d; color: white; }
 .mc-opt.correct  .mc-letter { background: #16a34a; border-color: #16a34a; color: white; }
 .mc-opt.wrong    .mc-letter { background: #dc2626; border-color: #dc2626; color: white; }
+.mc-opt.reveal   .mc-letter { background: #f59e0b; border-color: #f59e0b; color: white; }
 
-/* Feedback */
+/* ── Feedback ─────────────────────────────────── */
 .feedback {
-  border-radius: 8px; padding: 12px 16px; font-size: 13px; line-height: 1.7;
+  border-radius: 8px; padding: 12px 16px;
+  font-size: 13px; line-height: 1.75;
   display: none; margin-bottom: 16px;
 }
 .feedback.show { display: block; }
 .feedback.ok  { background: #f0fdf4; color: #14532d; border: 1px solid #86efac; }
 .feedback.err { background: #fef2f2; color: #7f1d1d; border: 1px solid #fca5a5; }
 
-/* Nav row */
-.nav-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+/* ── Buttons ─────────────────────────────────── */
+.nav-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
 .btn-back {
-  background: white; color: #444; border: 1.5px solid #d1d5db; border-radius: 6px;
-  padding: 10px 20px; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600;
+  background: white; color: #555; border: 1.5px solid #d1d5db;
+  border-radius: 6px; padding: 10px 20px;
+  font-family: Inter, sans-serif; font-size: 13px; font-weight: 600;
   cursor: pointer; transition: border-color 0.15s, color 0.15s;
 }
 .btn-back:hover { border-color: #00329d; color: #00329d; }
-.btn-next {
-  background: #00329d; color: white; border: none; border-radius: 6px;
-  padding: 10px 24px; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: background 0.15s; display: none;
+
+.btn-check {
+  background: #00329d; color: white; border: none;
+  border-radius: 6px; padding: 10px 22px;
+  font-family: Inter, sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+  display: none;
 }
-.btn-next:hover { background: #1a4db5; }
+.btn-check:hover { background: #1a4db5; }
+.btn-check.show { display: inline-block; }
+
+.btn-next {
+  background: #16a34a; color: white; border: none;
+  border-radius: 6px; padding: 10px 22px;
+  font-family: Inter, sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+  display: none;
+}
+.btn-next:hover { background: #15803d; }
 .btn-next.show { display: inline-block; }
+
 .btn-continue {
-  background: #16a34a; color: white; border: none; border-radius: 6px;
-  padding: 10px 24px; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: background 0.15s; text-decoration: none;
-  display: none; align-items: center; gap: 6px;
+  background: #16a34a; color: white; border: none;
+  border-radius: 6px; padding: 10px 22px;
+  font-family: Inter, sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+  text-decoration: none; display: none;
 }
 .btn-continue:hover { background: #15803d; }
-.btn-continue.show { display: inline-flex; }
+.btn-continue.show { display: inline-block; }
+
+/* ── Delta summary (screen 5) ────────────────── */
+.delta-box {
+  background: white; border: 1px solid #e5e7eb;
+  border-radius: 10px; padding: 20px 22px;
+  margin-bottom: 24px;
+}
+.delta-box-label {
+  font-size: 10px; font-weight: 700; color: #00329d;
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 14px;
+}
+.delta-row {
+  display: flex; align-items: baseline; gap: 10px;
+  font-size: 13px; padding: 6px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.delta-row:last-child { border-bottom: none; }
+.delta-name { color: #374151; font-weight: 600; flex: 1; }
+.delta-calc { color: #888; font-variant-numeric: tabular-nums; font-size: 12px; }
+.delta-result {
+  background: #dbeafe; color: #1d4ed8;
+  border-radius: 4px; padding: 1px 8px;
+  font-weight: 700; font-variant-numeric: tabular-nums;
+  font-size: 13px;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 600px) {
+  .bs-two-col { grid-template-columns: 1fr; gap: 24px; }
+}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <h1 class="page-title">The Balance Sheet Identity</h1>
+  <h1 class="page-title">The Balance Sheet</h1>
   <p class="page-sub">Activity 1 &mdash; Learning to read and compare balance sheets</p>
 
   <div class="progress-row">
@@ -204,169 +234,162 @@ body { background: #eef0f6; font-family: Inter, system-ui, sans-serif; color: #1
     <span class="prog-label" id="progLabel">Step 1 of 5</span>
   </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 1 — identity check
-  ════════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       SCREEN 1 — Identity check
+  ══════════════════════════════ -->
   <div class="screen active" id="s1">
-    <div class="card">
-      <div class="card-tag">Step 1 of 5</div>
-      <h2 class="card-title">ExampleCo — Balance Sheets</h2>
-      <p class="card-desc">Below are ExampleCo's opening and closing balance sheets. Review them, then check whether the balance sheet identity holds.</p>
-      <div id="grid1"></div>
+    <div class="step-header">
+      <div class="step-tag">Step 1 of 5</div>
+      <h2 class="step-title">ExampleCo — Balance Sheets</h2>
+      <p class="step-desc">Below are ExampleCo's opening and closing balance sheets for the year.</p>
     </div>
 
-    <div class="eq-box">
-      <div class="eq-box-label">Balance Sheet Identity</div>
-      <div class="eq-formula">
-        <span class="eq-term">Assets</span>
-        <span class="eq-sym">&minus;</span>
-        <span class="eq-term">Liabilities</span>
-        <span class="eq-sym">=</span>
-        <span class="eq-term">Equities</span>
-      </div>
-      <div class="eq-check-row">
-        <span class="eq-period-lbl">Opening</span>
-        <span class="eq-nums">100,000 &minus; 40,000 = <span class="eq-result">60,000</span></span>
-        <span class="eq-ok">✓</span>
-      </div>
-      <div class="eq-check-row">
-        <span class="eq-period-lbl">Closing</span>
-        <span class="eq-nums">100,000 &minus; 40,000 = <span class="eq-result">60,000</span></span>
-        <span class="eq-ok">✓</span>
-      </div>
-    </div>
+    <div id="grid1"></div>
 
     <div class="mc-card">
-      <div class="mc-q">Is the balance sheet in balance for both periods?</div>
+      <div class="mc-q">Is ExampleCo's balance sheet in balance for both periods?</div>
       <div class="mc-opts" id="mc1">
-        <div class="mc-opt" onclick="pick(1,this,true)"><div class="mc-letter">A</div>Yes — both the opening and closing balance sheets are in balance</div>
-        <div class="mc-opt" onclick="pick(1,this,false)"><div class="mc-letter">B</div>No — the opening balance sheet is not in balance</div>
-        <div class="mc-opt" onclick="pick(1,this,false)"><div class="mc-letter">C</div>No — the closing balance sheet is not in balance</div>
-        <div class="mc-opt" onclick="pick(1,this,false)"><div class="mc-letter">D</div>Neither balance sheet is in balance</div>
+        <div class="mc-opt" data-correct="true"><div class="mc-letter">A</div>Yes — both periods are in balance</div>
+        <div class="mc-opt"><div class="mc-letter">B</div>No — the opening balance sheet is not in balance</div>
+        <div class="mc-opt"><div class="mc-letter">C</div>No — the closing balance sheet is not in balance</div>
+        <div class="mc-opt"><div class="mc-letter">D</div>Neither period is in balance</div>
       </div>
       <div class="feedback" id="fb1"></div>
       <div class="nav-row">
-        <button class="btn-next show" id="nx1" onclick="goTo(2)" style="display:none">Next &rarr;</button>
+        <button class="btn-check" id="chk1" onclick="checkAnswer(1, 2)">Check Answer</button>
+        <button class="btn-next" id="nx1" onclick="goTo(2)">Next &rarr;</button>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 2 — change in Assets
-  ════════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       SCREEN 2 — Change in Assets
+  ══════════════════════════════ -->
   <div class="screen" id="s2">
-    <div class="card">
-      <div class="card-tag">Step 2 of 5</div>
-      <h2 class="card-title">The numbers changed</h2>
-      <p class="card-desc">The closing balance sheet now shows updated figures. The <span style="background:#dbeafe;color:#1d4ed8;padding:1px 6px;border-radius:4px;font-weight:700;font-size:12px;">blue values</span> indicate what changed in the Assets section.</p>
-      <div id="grid2"></div>
+    <div class="step-header">
+      <div class="step-tag">Step 2 of 5</div>
+      <h2 class="step-title">The numbers changed</h2>
+      <p class="step-desc">The closing balance sheet now shows updated figures. The values that changed in the <strong>Assets</strong> section are highlighted.</p>
     </div>
+
+    <div id="grid2"></div>
+
     <div class="mc-card">
       <div class="mc-q">What is the change in Total Assets from opening to closing?</div>
       <div class="mc-opts" id="mc2">
-        <div class="mc-opt" onclick="pick(2,this,false)"><div class="mc-letter">A</div>+6,000</div>
-        <div class="mc-opt" onclick="pick(2,this,true)"><div class="mc-letter">B</div>+11,000</div>
-        <div class="mc-opt" onclick="pick(2,this,false)"><div class="mc-letter">C</div>+5,000</div>
-        <div class="mc-opt" onclick="pick(2,this,false)"><div class="mc-letter">D</div>No change</div>
+        <div class="mc-opt"><div class="mc-letter">A</div>+6,000</div>
+        <div class="mc-opt" data-correct="true"><div class="mc-letter">B</div>+11,000</div>
+        <div class="mc-opt"><div class="mc-letter">C</div>+5,000</div>
+        <div class="mc-opt"><div class="mc-letter">D</div>No change</div>
       </div>
       <div class="feedback" id="fb2"></div>
       <div class="nav-row">
         <button class="btn-back" onclick="goTo(1)">&larr; Back</button>
+        <button class="btn-check" id="chk2" onclick="checkAnswer(2, 3)">Check Answer</button>
         <button class="btn-next" id="nx2" onclick="goTo(3)">Next &rarr;</button>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 3 — change in Liabilities
-  ════════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       SCREEN 3 — Change in Liabilities
+  ══════════════════════════════ -->
   <div class="screen" id="s3">
-    <div class="card">
-      <div class="card-tag">Step 3 of 5</div>
-      <h2 class="card-title">Now look at Liabilities</h2>
-      <p class="card-desc">Same balance sheets. The <span style="background:#dbeafe;color:#1d4ed8;padding:1px 6px;border-radius:4px;font-weight:700;font-size:12px;">blue values</span> now highlight what changed in the Liabilities section.</p>
-      <div id="grid3"></div>
+    <div class="step-header">
+      <div class="step-tag">Step 3 of 5</div>
+      <h2 class="step-title">Now look at Liabilities</h2>
+      <p class="step-desc">Same balance sheets. The values that changed in the <strong>Liabilities</strong> section are highlighted.</p>
     </div>
+
+    <div id="grid3"></div>
+
     <div class="mc-card">
       <div class="mc-q">What is the change in Total Liabilities from opening to closing?</div>
       <div class="mc-opts" id="mc3">
-        <div class="mc-opt" onclick="pick(3,this,false)"><div class="mc-letter">A</div>+11,000</div>
-        <div class="mc-opt" onclick="pick(3,this,false)"><div class="mc-letter">B</div>+5,000</div>
-        <div class="mc-opt" onclick="pick(3,this,true)"><div class="mc-letter">C</div>+6,000</div>
-        <div class="mc-opt" onclick="pick(3,this,false)"><div class="mc-letter">D</div>No change</div>
+        <div class="mc-opt"><div class="mc-letter">A</div>+11,000</div>
+        <div class="mc-opt"><div class="mc-letter">B</div>+5,000</div>
+        <div class="mc-opt" data-correct="true"><div class="mc-letter">C</div>+6,000</div>
+        <div class="mc-opt"><div class="mc-letter">D</div>No change</div>
       </div>
       <div class="feedback" id="fb3"></div>
       <div class="nav-row">
         <button class="btn-back" onclick="goTo(2)">&larr; Back</button>
+        <button class="btn-check" id="chk3" onclick="checkAnswer(3, 4)">Check Answer</button>
         <button class="btn-next" id="nx3" onclick="goTo(4)">Next &rarr;</button>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 4 — change in Equities
-  ════════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       SCREEN 4 — Change in Equities
+  ══════════════════════════════ -->
   <div class="screen" id="s4">
-    <div class="card">
-      <div class="card-tag">Step 4 of 5</div>
-      <h2 class="card-title">Now look at Equities</h2>
-      <p class="card-desc">Same balance sheets. The <span style="background:#dbeafe;color:#1d4ed8;padding:1px 6px;border-radius:4px;font-weight:700;font-size:12px;">blue values</span> now highlight what changed in the Equities section.</p>
-      <div id="grid4"></div>
+    <div class="step-header">
+      <div class="step-tag">Step 4 of 5</div>
+      <h2 class="step-title">Now look at Equities</h2>
+      <p class="step-desc">Same balance sheets. The values that changed in the <strong>Equities</strong> section are highlighted.</p>
     </div>
+
+    <div id="grid4"></div>
+
     <div class="mc-card">
       <div class="mc-q">What is the change in Total Equities from opening to closing?</div>
       <div class="mc-opts" id="mc4">
-        <div class="mc-opt" onclick="pick(4,this,false)"><div class="mc-letter">A</div>+11,000</div>
-        <div class="mc-opt" onclick="pick(4,this,false)"><div class="mc-letter">B</div>+6,000</div>
-        <div class="mc-opt" onclick="pick(4,this,true)"><div class="mc-letter">C</div>+5,000</div>
-        <div class="mc-opt" onclick="pick(4,this,false)"><div class="mc-letter">D</div>No change</div>
+        <div class="mc-opt"><div class="mc-letter">A</div>+11,000</div>
+        <div class="mc-opt"><div class="mc-letter">B</div>+6,000</div>
+        <div class="mc-opt" data-correct="true"><div class="mc-letter">C</div>+5,000</div>
+        <div class="mc-opt"><div class="mc-letter">D</div>No change</div>
       </div>
       <div class="feedback" id="fb4"></div>
       <div class="nav-row">
         <button class="btn-back" onclick="goTo(3)">&larr; Back</button>
+        <button class="btn-check" id="chk4" onclick="checkAnswer(4, 5)">Check Answer</button>
         <button class="btn-next" id="nx4" onclick="goTo(5)">Next &rarr;</button>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       SCREEN 5 — what caused the changes?
-  ════════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       SCREEN 5 — Cause question
+  ══════════════════════════════ -->
   <div class="screen" id="s5">
-    <div class="card">
-      <div class="card-tag">Step 5 of 5</div>
-      <h2 class="card-title">So what caused these changes?</h2>
-      <p class="card-desc" style="margin-bottom:16px;">You've observed the following changes between the two balance sheets:</p>
-      <div class="delta-box">
-        <div class="delta-box-label">Changes observed</div>
-        <div class="delta-row">
-          <span class="delta-name">Total Assets</span>
-          <span class="delta-calc">111,000 &minus; 100,000</span>
-          <span class="delta-result">+11,000</span>
-        </div>
-        <div class="delta-row">
-          <span class="delta-name">Total Liabilities</span>
-          <span class="delta-calc">46,000 &minus; 40,000</span>
-          <span class="delta-result">+6,000</span>
-        </div>
-        <div class="delta-row">
-          <span class="delta-name">Total Equities</span>
-          <span class="delta-calc">65,000 &minus; 60,000</span>
-          <span class="delta-result">+5,000</span>
-        </div>
+    <div class="step-header">
+      <div class="step-tag">Step 5 of 5</div>
+      <h2 class="step-title">What caused these changes?</h2>
+      <p class="step-desc">You've measured the changes across all three sections of the balance sheet.</p>
+    </div>
+
+    <div class="delta-box">
+      <div class="delta-box-label">Changes observed</div>
+      <div class="delta-row">
+        <span class="delta-name">Total Assets</span>
+        <span class="delta-calc">111,000 &minus; 100,000</span>
+        <span class="delta-result">+11,000</span>
+      </div>
+      <div class="delta-row">
+        <span class="delta-name">Total Liabilities</span>
+        <span class="delta-calc">46,000 &minus; 40,000</span>
+        <span class="delta-result">+6,000</span>
+      </div>
+      <div class="delta-row">
+        <span class="delta-name">Total Equities</span>
+        <span class="delta-calc">65,000 &minus; 60,000</span>
+        <span class="delta-result">+5,000</span>
       </div>
     </div>
+
     <div class="mc-card">
       <div class="mc-q">Based only on these two balance sheets, what caused these changes?</div>
       <div class="mc-opts" id="mc5">
-        <div class="mc-opt" onclick="pick(5,this,false)"><div class="mc-letter">A</div>The company earned a profit</div>
-        <div class="mc-opt" onclick="pick(5,this,false)"><div class="mc-letter">B</div>The company borrowed money from a bank</div>
-        <div class="mc-opt" onclick="pick(5,this,false)"><div class="mc-letter">C</div>Investors contributed more capital</div>
-        <div class="mc-opt" onclick="pick(5,this,true)"><div class="mc-letter">D</div>We can't determine the cause from the balance sheet alone</div>
+        <div class="mc-opt"><div class="mc-letter">A</div>The company earned a profit</div>
+        <div class="mc-opt"><div class="mc-letter">B</div>The company borrowed money from a bank</div>
+        <div class="mc-opt"><div class="mc-letter">C</div>Investors contributed more capital</div>
+        <div class="mc-opt" data-correct="true"><div class="mc-letter">D</div>We can't determine the cause from the balance sheet alone</div>
       </div>
       <div class="feedback" id="fb5"></div>
       <div class="nav-row">
         <button class="btn-back" onclick="goTo(4)">&larr; Back</button>
+        <button class="btn-check" id="chk5" onclick="checkAnswer(5, null)">Check Answer</button>
         <a class="btn-continue" id="btnCont" href="simplified-example.html">Continue learning the cause &rarr;</a>
       </div>
     </div>
@@ -376,112 +399,140 @@ body { background: #eef0f6; font-family: Inter, system-ui, sans-serif; color: #1
 
 <script>
 // ── DATA ─────────────────────────────────────────────────────
-var O = { cash:20000, nca:80000, loan:40000, cs:50000, re:10000 };
-var C = { cash:26000, nca:85000, loan:46000, cs:50000, re:15000 };
+var O = { cash: 20000, nca: 80000, loan: 40000, cs: 50000, re: 10000 };
+var C = { cash: 26000, nca: 85000, loan: 46000, cs: 50000, re: 15000 };
 
-function fmt(n) {
-  return n.toLocaleString('en-US');
-}
+function fmt(n) { return n.toLocaleString('en-US'); }
 
 // ── BALANCE SHEET RENDERER ────────────────────────────────────
-// highlight: null | 'assets' | 'liab' | 'equity'
-function buildGrid(containerId, openData, closeData, highlight) {
-  function val(n, doHL) {
-    var cls = doHL ? 'bs-val hl' : 'bs-val';
-    return '<span class="' + cls + '">' + fmt(n) + '</span>';
+function buildColumn(data, isClose, highlight) {
+  var ha = isClose && highlight === 'assets';
+  var hl = isClose && highlight === 'liab';
+  var he = isClose && highlight === 'equity';
+
+  function v(n, doHL) {
+    return '<span class="item-value' + (doHL ? ' hl' : '') + '">' + fmt(n) + '</span>';
   }
 
-  function col(d, isClose) {
-    var ha = isClose && highlight === 'assets';
-    var hl = isClose && highlight === 'liab';
-    var he = isClose && highlight === 'equity';
-    return {
-      assets: '<div class="bs-cell">'
-        + '<div class="bs-hdr">ASSETS</div><hr class="bs-line">'
-        + '<div class="bs-row"><span class="bs-label">Cash Assets</span>'     + val(d.cash, ha) + '</div>'
-        + '<div class="bs-row"><span class="bs-label">Non-Cash Assets</span>' + val(d.nca,  ha) + '</div>'
-        + '</div>',
-      sepEq: '<div class="bs-sep-cell"><span class="bs-sep-eq-sym">=</span></div>',
-      liab: '<div class="bs-cell">'
-        + '<div class="bs-hdr">TOTAL LIABILITIES</div><hr class="bs-line">'
-        + '<div class="bs-row"><span class="bs-label">Bank Loan</span>' + val(d.loan, hl) + '</div>'
-        + '</div>',
-      sepPlus: '<div class="bs-sep-cell"><span class="bs-plus-sym">+</span></div>',
-      equity: '<div class="bs-cell">'
-        + '<div class="bs-hdr">EQUITIES</div><hr class="bs-line">'
-        + '<div class="bs-row"><span class="bs-label">Common Stock</span>'      + val(d.cs, he) + '</div>'
-        + '<div class="bs-row"><span class="bs-label">Retained Earnings</span>' + val(d.re, he) + '</div>'
-        + '</div>'
-    };
-  }
-
-  var L = col(openData,  false);
-  var R = col(closeData, true);
-
-  var html = '<div class="bs-wrap">'
-    + '<div class="bs-period-row">'
-    +   '<span class="period-badge">Opening Balance Sheet</span>'
-    +   '<span class="period-badge">Closing Balance Sheet</span>'
+  return ''
+    + '<div class="bs-section">'
+    +   '<div class="bs-section-title">Assets</div>'
+    +   '<div class="bs-item"><span class="item-label">Cash Assets</span>'      + v(data.cash, ha) + '</div>'
+    +   '<div class="bs-item"><span class="item-label">Non-Cash Assets</span>'  + v(data.nca,  ha) + '</div>'
     + '</div>'
-    + '<div class="bs-grid">'
-    +   L.assets   + R.assets
-    +   L.sepEq    + R.sepEq
-    +   L.liab     + R.liab
-    +   L.sepPlus  + R.sepPlus
-    +   L.equity   + R.equity
+    + '<div class="bs-section">'
+    +   '<div class="bs-section-title">Liabilities</div>'
+    +   '<div class="bs-item"><span class="item-label">Bank Loan</span>'        + v(data.loan, hl) + '</div>'
+    + '</div>'
+    + '<div class="bs-section">'
+    +   '<div class="bs-section-title">Equities</div>'
+    +   '<div class="bs-item"><span class="item-label">Common Stock</span>'     + v(data.cs, he) + '</div>'
+    +   '<div class="bs-item"><span class="item-label">Retained Earnings</span>'+ v(data.re, he) + '</div>'
+    + '</div>';
+}
+
+function buildGrid(containerId, openData, closeData, highlight) {
+  document.getElementById(containerId).innerHTML =
+    '<div class="bs-two-col">'
+    + '<div class="bs-column">'
+    +   '<div class="bs-col-label">Opening Balance Sheet</div>'
+    +   buildColumn(openData, false, highlight)
+    + '</div>'
+    + '<div class="bs-column">'
+    +   '<div class="bs-col-label">Closing Balance Sheet</div>'
+    +   buildColumn(closeData, true, highlight)
     + '</div>'
     + '</div>';
-
-  document.getElementById(containerId).innerHTML = html;
 }
+
+// ── RENDER GRIDS ──────────────────────────────────────────────
+buildGrid('grid1', O, O, null);          // Screen 1: identical, no highlight
+buildGrid('grid2', O, C, 'assets');      // Screen 2: assets highlighted
+buildGrid('grid3', O, C, 'liab');        // Screen 3: liabilities highlighted
+buildGrid('grid4', O, C, 'equity');      // Screen 4: equities highlighted
 
 // ── FEEDBACK CONTENT ──────────────────────────────────────────
 var FB = {
   1: {
-    ok:  '\u2713 Correct. For each balance sheet: Assets \u2212 Liabilities = Equities. Opening: 100,000 \u2212 40,000 = 60,000. Closing: 100,000 \u2212 40,000 = 60,000. Both hold.',
-    err: 'Look again. For each balance sheet, check Assets \u2212 Liabilities = Equities. Opening: 100,000 \u2212 40,000 = 60,000 \u2713. Closing: 100,000 \u2212 40,000 = 60,000 \u2713.'
+    ok:  '\u2713 Correct. For each period: Assets \u2212 Liabilities = Equities. Opening: 100,000 \u2212 40,000 = 60,000. Closing: 100,000 \u2212 40,000 = 60,000. Both balance.',
+    err: 'Not quite. Check each period: Assets \u2212 Liabilities should equal Equities. Opening: 100,000 \u2212 40,000 = 60,000. Closing: 100,000 \u2212 40,000 = 60,000. Both are in balance.'
   },
   2: {
-    ok:  '\u2713 Correct. Total Assets: 100,000 \u2192 111,000 = +11,000. Both Cash Assets (+6,000) and Non-Cash Assets (+5,000) increased.',
-    err: 'Compare Total Assets: Opening = 100,000, Closing = 111,000. Change = 111,000 \u2212 100,000 = +11,000.'
+    ok:  '\u2713 Correct. Total Assets increased from 100,000 to 111,000 \u2014 a change of +11,000. Both Cash Assets (+6,000) and Non-Cash Assets (+5,000) increased.',
+    err: 'Look at the Assets section. Add up both rows in the closing column: 26,000 + 85,000 = 111,000. Opening total: 100,000. Change = +11,000.'
   },
   3: {
     ok:  '\u2713 Correct. The Bank Loan increased from 40,000 to 46,000 \u2014 a change of +6,000 in Total Liabilities.',
     err: 'Look at the Liabilities section. Bank Loan: Opening = 40,000, Closing = 46,000. Change = 46,000 \u2212 40,000 = +6,000.'
   },
   4: {
-    ok:  '\u2713 Correct. Total Equities: 60,000 \u2192 65,000 = +5,000. Only Retained Earnings changed (+5,000); Common Stock stayed the same.',
-    err: 'Look at Total Equities: Opening = 60,000, Closing = 65,000. Change = 65,000 \u2212 60,000 = +5,000.'
+    ok:  '\u2713 Correct. Total Equities increased from 60,000 to 65,000 \u2014 a change of +5,000. Only Retained Earnings changed; Common Stock stayed the same.',
+    err: 'Look at the Equities section. Common Stock: unchanged at 50,000. Retained Earnings: 10,000 \u2192 15,000. Total change = +5,000.'
   },
   5: {
-    ok:  '\u2713 Exactly right. A balance sheet shows <em>balances at two points in time</em> \u2014 not the transactions that caused them. The same changes could result from borrowing, earning a profit, receiving investment, or some combination. To understand the cause, we need the other financial statements.',
-    err: 'The balance sheet only shows beginning and ending balances \u2014 not what happened in between. Any of the other options could plausibly produce these changes. Without the Income Statement or Cash Flow Statement, we cannot determine the cause.'
+    ok:  '\u2713 Exactly right. The balance sheet shows balances at two points in time \u2014 not the transactions that produced them. All three of the other options could lead to similar-looking changes. To understand what actually happened, we need the other financial statements.',
+    err: 'Think carefully. The balance sheet only records ending balances, not what caused them. Earning a profit, borrowing, and receiving investment could all produce these same numbers. Without seeing the Income Statement or Cash Flow Statement, we cannot know which occurred.'
   }
 };
 
-// ── INTERACTION ───────────────────────────────────────────────
-function pick(screen, el, correct) {
-  var mcId = 'mc' + screen;
-  var fbId = 'fb' + screen;
-  var nxId = 'nx' + screen;
+// ── MC INTERACTION ────────────────────────────────────────────
+// Each screen's MC allows re-selection. Check Answer validates & locks.
 
-  document.querySelectorAll('#' + mcId + ' .mc-opt').forEach(function(o) {
-    o.classList.add('locked');
+function setupMC(screenNum) {
+  var mcEl  = document.getElementById('mc' + screenNum);
+  var chkEl = document.getElementById('chk' + screenNum);
+  var opts  = mcEl.querySelectorAll('.mc-opt');
+
+  opts.forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      if (opt.classList.contains('locked')) return;
+      // Deselect all, select this one
+      opts.forEach(function(o) { o.classList.remove('selected'); });
+      opt.classList.add('selected');
+      // Show check button
+      if (chkEl) chkEl.classList.add('show');
+      // Hide feedback until checked
+      document.getElementById('fb' + screenNum).classList.remove('show');
+    });
   });
-  el.classList.add(correct ? 'correct' : 'wrong');
-
-  var fb = document.getElementById(fbId);
-  fb.className = 'feedback show ' + (correct ? 'ok' : 'err');
-  fb.innerHTML = FB[screen][correct ? 'ok' : 'err'];
-
-  if (screen < 5) {
-    var nx = document.getElementById(nxId);
-    if (nx) nx.classList.add('show');
-  } else {
-    document.getElementById('btnCont').classList.add('show');
-  }
 }
 
+function checkAnswer(screenNum, nextScreen) {
+  var mcEl  = document.getElementById('mc' + screenNum);
+  var fbEl  = document.getElementById('fb' + screenNum);
+  var chkEl = document.getElementById('chk' + screenNum);
+  var nxEl  = nextScreen ? document.getElementById('nx' + screenNum) : null;
+  var contEl = document.getElementById('btnCont');
+
+  var opts    = mcEl.querySelectorAll('.mc-opt');
+  var selected = mcEl.querySelector('.mc-opt.selected');
+  if (!selected) return; // nothing selected
+
+  var correct = selected.getAttribute('data-correct') === 'true';
+
+  // Lock all options and style them
+  opts.forEach(function(o) {
+    o.classList.add('locked');
+    if (o === selected) {
+      o.classList.remove('selected');
+      o.classList.add(correct ? 'correct' : 'wrong');
+    } else if (!correct && o.getAttribute('data-correct') === 'true') {
+      // Reveal the correct answer in amber when student was wrong
+      o.classList.add('reveal');
+    }
+  });
+
+  // Show feedback
+  fbEl.className = 'feedback show ' + (correct ? 'ok' : 'err');
+  fbEl.innerHTML = FB[screenNum][correct ? 'ok' : 'err'];
+
+  // Hide check, show next
+  if (chkEl) chkEl.classList.remove('show');
+  if (nxEl)  nxEl.classList.add('show');
+  if (!nextScreen && contEl) contEl.classList.add('show');
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────
 function goTo(n) {
   document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
   document.getElementById('s' + n).classList.add('active');
@@ -489,7 +540,7 @@ function goTo(n) {
   for (var i = 1; i <= 5; i++) {
     var d = document.getElementById('pd' + i);
     d.classList.remove('active', 'done');
-    if (i < n)       d.classList.add('done');
+    if (i < n)        d.classList.add('done');
     else if (i === n) d.classList.add('active');
   }
   document.getElementById('progLabel').textContent = 'Step ' + n + ' of 5';
@@ -497,16 +548,7 @@ function goTo(n) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────
-// Screen 1: both sides identical (opening values)
-buildGrid('grid1', O, O, null);
-
-// Screens 2–4: opening vs closing, each highlights one section
-buildGrid('grid2', O, C, 'assets');
-buildGrid('grid3', O, C, 'liab');
-buildGrid('grid4', O, C, 'equity');
-
-// Screen 1 next button: always visible (no MC gate on first Next)
-document.getElementById('nx1').style.display = 'none'; // revealed only after pick
+for (var s = 1; s <= 5; s++) { setupMC(s); }
 </script>
 </body>
 </html>
