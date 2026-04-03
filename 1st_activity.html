@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Balance Sheet Identity — Activity 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background: #e6e9f2;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   color: #111;
   min-height: 100vh;
   width: 100%;
@@ -23,7 +23,7 @@ body {
 }
 
 /* ── Page header ──────────────────────────────────── */
-.page-title { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; margin-bottom: 4px; }
+.page-title { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
 .page-sub   { font-size: clamp(12px, 1.5vw, 14px); color: #666; margin-bottom: 28px; }
 
 /* ── Progress dots ────────────────────────────────── */
@@ -196,7 +196,7 @@ body {
 .btn-back {
   background: white; color: #555; border: 1.5px solid #d1d5db;
   border-radius: 6px; padding: 10px 20px;
-  font-family: 'Open Sans', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
   cursor: pointer; transition: border-color 0.15s, color 0.15s;
 }
 .btn-back:hover { border-color: #00329d; color: #00329d; }
@@ -204,7 +204,7 @@ body {
 .btn-check {
   background: #00329d; color: white; border: none;
   border-radius: 6px; padding: 10px 22px;
-  font-family: 'Open Sans', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
   cursor: pointer; transition: background 0.15s; display: none;
 }
 .btn-check:hover  { background: #1a4db5; }
@@ -213,7 +213,7 @@ body {
 .btn-next {
   background: #16a34a; color: white; border: none;
   border-radius: 6px; padding: 10px 22px;
-  font-family: 'Open Sans', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
   cursor: pointer; transition: background 0.15s; display: none;
 }
 .btn-next:hover { background: #15803d; }
@@ -227,11 +227,10 @@ body {
 .btn-hint {
   background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe;
   border-radius: 6px; padding: 7px 16px;
-  font-family: 'Open Sans', sans-serif; font-size: clamp(11px, 1.2vw, 12px); font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: clamp(11px, 1.2vw, 12px); font-weight: 600;
   cursor: pointer; transition: background 0.15s, border-color 0.15s; white-space: nowrap;
 }
 .btn-hint:hover { background: #dbeafe; border-color: #93c5fd; }
-.btn-hint:disabled { opacity: 0.5; cursor: default; }
 
 /* ── Responsive ───────────────────────────────────── */
 @media (max-width: 600px) {
@@ -293,7 +292,7 @@ body {
     <div class="mc-card">
       <div class="mc-q-row">
         <div class="mc-q">What is the change in Total Assets from opening to closing?</div>
-        <button class="btn-hint" id="hint2" onclick="showHint(2)">Hint</button>
+        <button class="btn-hint" id="hint2" onclick="toggleHint(2)">Show Hint</button>
       </div>
       <div class="mc-opts" id="mc2">
         <div class="mc-opt"><div class="mc-letter">A</div>+12,000</div>
@@ -323,7 +322,7 @@ body {
     <div class="mc-card">
       <div class="mc-q-row">
         <div class="mc-q">What is the change in Total Liabilities from opening to closing?</div>
-        <button class="btn-hint" id="hint3" onclick="showHint(3)">Hint</button>
+        <button class="btn-hint" id="hint3" onclick="toggleHint(3)">Show Hint</button>
       </div>
       <div class="mc-opts" id="mc3">
         <div class="mc-opt"><div class="mc-letter">A</div>+56,000</div>
@@ -353,7 +352,7 @@ body {
     <div class="mc-card">
       <div class="mc-q-row">
         <div class="mc-q">What is the change in Total Equities from opening to closing?</div>
-        <button class="btn-hint" id="hint4" onclick="showHint(4)">Hint</button>
+        <button class="btn-hint" id="hint4" onclick="toggleHint(4)">Show Hint</button>
       </div>
       <div class="mc-opts" id="mc4">
         <div class="mc-opt"><div class="mc-letter">A</div>+14,000</div>
@@ -401,7 +400,7 @@ body {
     <div class="mc-card">
       <div class="mc-q-row">
         <div class="mc-q">Based only on these two balance sheets, what caused these changes?</div>
-        <button class="btn-hint" id="hint5" onclick="showHint(5)">Hint</button>
+        <button class="btn-hint" id="hint5" onclick="toggleHint(5)">Show Hint</button>
       </div>
       <div class="mc-opts" id="mc5">
         <div class="mc-opt"><div class="mc-letter">A</div>The company earned a profit</div>
@@ -489,13 +488,13 @@ buildGrid('grid3', O, C, 'liab');
 buildGrid('grid4', O, C, 'equity');
 buildGrid('grid5', O, C, 'all');
 
-// showHint: just reveal pre-rendered highlights — no DOM re-creation needed.
-// The .hint-active class stays on the div permanently, so navigating away
-// and back never hides the hint again.
-function showHint(screenNum) {
-  document.getElementById('grid' + screenNum).classList.add('hint-active');
-  var btn = document.getElementById('hint' + screenNum);
-  if (btn) { btn.textContent = 'Hint shown'; btn.disabled = true; }
+// toggleHint: show or hide the pre-rendered highlights by toggling .hint-active.
+// The class lives on the grid div so it persists across navigation.
+function toggleHint(screenNum) {
+  var grid = document.getElementById('grid' + screenNum);
+  var btn  = document.getElementById('hint' + screenNum);
+  var showing = grid.classList.toggle('hint-active');
+  if (btn) btn.textContent = showing ? 'Hide Hint' : 'Show Hint';
 }
 
 // ── FEEDBACK MESSAGES ─────────────────────────────────────────
