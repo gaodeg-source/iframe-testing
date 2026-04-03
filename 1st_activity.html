@@ -72,7 +72,15 @@ body {
 .bs-section { padding: 14px 0; }
 .bs-section:first-child { padding-top: 0; }
 .bs-section:last-child  { padding-bottom: 0; }
-.bs-section + .bs-section { border-top: 1.5px solid #9ca3af; }
+.bs-section + .bs-section {
+  border-top: 1.5px solid #9ca3af;
+  /* Pull the border out to the card edges, bypassing the card's padding */
+  margin-left:  calc(-1 * clamp(14px, 2vw, 22px));
+  margin-right: calc(-1 * clamp(14px, 2vw, 22px));
+  /* Restore the content padding inside the section */
+  padding-left:  clamp(14px, 2vw, 22px);
+  padding-right: clamp(14px, 2vw, 22px);
+}
 
 .bs-section-title {
   font-size: 10px; font-weight: 700;
