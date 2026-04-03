@@ -362,18 +362,18 @@ body {
       <div class="delta-box-label">Changes observed</div>
       <div class="delta-row">
         <span class="delta-name">Total Assets</span>
-        <span class="delta-calc">111,000 &minus; 100,000</span>
-        <span class="delta-result">+11,000</span>
+        <span class="delta-calc">150,000 &minus; 120,000</span>
+        <span class="delta-result">+30,000</span>
       </div>
       <div class="delta-row">
         <span class="delta-name">Total Liabilities</span>
-        <span class="delta-calc">46,000 &minus; 40,000</span>
+        <span class="delta-calc">56,000 &minus; 50,000</span>
         <span class="delta-result">+6,000</span>
       </div>
       <div class="delta-row">
         <span class="delta-name">Total Equities</span>
-        <span class="delta-calc">65,000 &minus; 60,000</span>
-        <span class="delta-result">+5,000</span>
+        <span class="delta-calc">94,000 &minus; 70,000</span>
+        <span class="delta-result">+24,000</span>
       </div>
     </div>
     <div class="mc-card">
@@ -397,8 +397,8 @@ body {
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────
-var O = { cash:20000, nca:80000, loan:40000, cs:50000, re:10000 };
-var C = { cash:26000, nca:85000, loan:46000, cs:50000, re:15000 };
+var O = { cash:40000, nca:80000, loan:50000, cs:60000, re:10000 };
+var C = { cash:58000, nca:92000, loan:56000, cs:60000, re:34000 };
 
 function fmt(n) { return n.toLocaleString('en-US'); }
 
@@ -435,7 +435,7 @@ function buildColumn(data, isClose, highlight) {
 
     + '<div class="bs-section">'
     + '<div class="bs-section-title">Equities</div>'
-    + '<div class="bs-item"><span class="item-label">Common Stock</span>'       + v(data.cs,  false) + '</div>'
+    + '<div class="bs-item"><span class="item-label">Contributed Capital</span>' + v(data.cs,  false) + '</div>'
     + '<div class="bs-item"><span class="item-label">Retained Earnings</span>'  + v(data.re,  hre)   + '</div>'
     + '<div class="bs-item total-row"><span class="item-label">Total Equities</span>' + v(totalE, hre) + '</div>'
     + '</div>'
@@ -466,20 +466,20 @@ buildGrid('grid5', O, C, null);      // Screen 5: no highlight, full comparison
 // ── FEEDBACK MESSAGES ─────────────────────────────────────────
 var FB = {
   1: {
-    ok:  '\u2713 Correct. For each period, Assets \u2212 Liabilities = Equities. Opening: 100,000 \u2212 40,000 = 60,000. Closing: 100,000 \u2212 40,000 = 60,000. Both balance.',
+    ok:  '\u2713 Correct. For each period, Assets \u2212 Liabilities = Equities. Opening: 120,000 \u2212 50,000 = 70,000. Closing: 150,000 \u2212 56,000 = 94,000. Both balance.',
     err: 'Not quite. For each period, check whether Assets \u2212 Liabilities = Equities. Look at the totals in both columns and try again.'
   },
   2: {
-    ok:  '\u2713 Correct. Total Assets increased from 100,000 to 111,000 \u2014 a change of +11,000. Cash Assets rose by +6,000 and Non-Cash Assets by +5,000.',
-    err: 'Look at the Total Assets row in each column. Opening total: 100,000. Closing total: 111,000. What is the difference?'
+    ok:  '\u2713 Correct. Total Assets increased from 120,000 to 150,000 \u2014 a change of +30,000. Cash Assets rose by +18,000 and Non-Cash Assets by +12,000.',
+    err: 'Look at the Total Assets row in each column. Opening total: 120,000. Closing total: 150,000. What is the difference?'
   },
   3: {
-    ok:  '\u2713 Correct. The Bank Loan increased from 40,000 to 46,000 \u2014 a change of +6,000 in Total Liabilities.',
+    ok:  '\u2713 Correct. The Bank Loan increased from 50,000 to 56,000 \u2014 a change of +6,000 in Total Liabilities.',
     err: 'Focus on the Liabilities section. Compare the Total Liabilities row in the opening and closing columns and try again.'
   },
   4: {
-    ok:  '\u2713 Correct. Total Equities increased from 60,000 to 65,000 \u2014 a change of +5,000. Common Stock was unchanged; only Retained Earnings increased.',
-    err: 'Look at the Total Equities row in each column. Opening: 60,000. Closing: 65,000. What is the difference?'
+    ok:  '\u2713 Correct. Total Equities increased from 70,000 to 94,000 \u2014 a change of +24,000. Contributed Capital was unchanged; only Retained Earnings increased.',
+    err: 'Look at the Total Equities row in each column. Opening: 70,000. Closing: 94,000. What is the difference?'
   },
   5: {
     ok:  '\u2713 Exactly right. The balance sheet shows balances at two points in time \u2014 not the transactions that produced them. Earning a profit, borrowing, or receiving investment could all result in similar-looking changes. To understand the actual cause, we need the other financial statements.',
