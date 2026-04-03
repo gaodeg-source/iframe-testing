@@ -215,14 +215,10 @@ body {
 .btn-next:hover { background: #15803d; }
 .btn-next.show  { display: inline-block; }
 
-.btn-continue {
-  background: #16a34a; color: white; border: none;
-  border-radius: 6px; padding: 10px 22px;
-  font-family: Inter, sans-serif; font-size: clamp(12px, 1.3vw, 13px); font-weight: 600;
-  cursor: pointer; transition: background 0.15s; text-decoration: none; display: none;
+.next-page-hint {
+  font-size: clamp(13px, 1.4vw, 15px); font-weight: 600; color: #1d4ed8; display: none;
 }
-.btn-continue:hover { background: #15803d; }
-.btn-continue.show  { display: inline-block; }
+.next-page-hint.show { display: inline-block; }
 
 /* ── Responsive ───────────────────────────────────── */
 @media (max-width: 600px) {
@@ -391,7 +387,7 @@ body {
       <div class="nav-row">
         <button class="btn-back" onclick="goTo(4)">&larr; Back</button>
         <button class="btn-check" id="chk5" onclick="checkAnswer(5,null)">Check Answer</button>
-        <a class="btn-continue" id="btnCont" href="simplified-example.html">Continue learning the cause &rarr;</a>
+        <span class="next-page-hint" id="btnCont">Go to the next page to see what's the cause!</span>
       </div>
     </div>
   </div>
