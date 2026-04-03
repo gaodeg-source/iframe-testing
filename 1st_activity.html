@@ -225,13 +225,13 @@ body {
 .next-page-hint.show { display: inline-block; }
 
 .btn-hint {
-  background: white; color: #7c3aed; border: 1.5px solid #c4b5fd;
+  background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe;
   border-radius: 6px; padding: 7px 16px;
   font-family: 'Open Sans', sans-serif; font-size: clamp(11px, 1.2vw, 12px); font-weight: 600;
-  cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s; white-space: nowrap;
 }
-.btn-hint:hover { background: #f5f3ff; border-color: #7c3aed; }
-.btn-hint:disabled { opacity: 0.45; cursor: default; }
+.btn-hint:hover { background: #dbeafe; border-color: #93c5fd; }
+.btn-hint:disabled { opacity: 0.5; cursor: default; }
 
 /* ── Responsive ───────────────────────────────────── */
 @media (max-width: 600px) {
@@ -429,12 +429,12 @@ function fmt(n) { return n.toLocaleString('en-US'); }
 
 // ── BALANCE SHEET RENDERER ────────────────────────────────────
 // highlight: null | 'assets' | 'liab' | 'equity' | 'all'
-// Only the closing column ever gets highlights.
+// Both columns get highlights when a hint is active.
 // Only the Total row value is highlighted (not individual line items).
 function buildColumn(data, isClose, highlight) {
-  var ha  = isClose && (highlight === 'assets' || highlight === 'all');
-  var hl  = isClose && (highlight === 'liab'   || highlight === 'all');
-  var hte = isClose && (highlight === 'equity' || highlight === 'all');
+  var ha  = !!(highlight === 'assets' || highlight === 'all');
+  var hl  = !!(highlight === 'liab'   || highlight === 'all');
+  var hte = !!(highlight === 'equity' || highlight === 'all');
 
   var totalA = data.cash + data.nca;
   var totalL = data.loan;
@@ -489,12 +489,24 @@ buildGrid('grid4', O, C, null);
 buildGrid('grid5', O, C, null);
 
 // Hint map: screen → highlight type
-var HINT_HL = { 2: 'assets', 3: 'liab', 4: 'equity', 5: 'all' };
+var HINT_HL    = { 2: 'assets', 3: 'liab', 4: 'equity', 5: 'all' };
+var hintShown  = {};   // tracks which screens have had hint revealed
 
 function showHint(screenNum) {
-  buildGrid('grid' + screenNum, O, C, HINT_HL[screenNum]);
+  hintShown[screenNum] = true;
+  var hl = HINT_HL[screenNum];
+  // Screen 1 grid is identical (O,O); screens 2-5 compare O vs C
+  buildGrid('grid' + screenNum, O, C, hl);
   var btn = document.getElementById('hint' + screenNum);
   if (btn) { btn.textContent = 'Hint shown'; btn.disabled = true; }
+}
+
+function applyHintState(screenNum) {
+  if (hintShown[screenNum]) {
+    buildGrid('grid' + screenNum, O, C, HINT_HL[screenNum]);
+    var btn = document.getElementById('hint' + screenNum);
+    if (btn) { btn.textContent = 'Hint shown'; btn.disabled = true; }
+  }
 }
 
 // ── FEEDBACK MESSAGES ─────────────────────────────────────────
@@ -587,6 +599,7 @@ function goTo(n) {
     else if (i === n) d.classList.add('active');
   }
   document.getElementById('progLabel').textContent = 'Step ' + n + ' of 5';
+  applyHintState(n);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
