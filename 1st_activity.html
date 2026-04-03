@@ -357,6 +357,7 @@ body {
       <h2 class="step-title">What caused these changes?</h2>
       <p class="step-desc">You've measured the changes across all three sections of the balance sheet.</p>
     </div>
+    <div id="grid5"></div>
     <div class="delta-box">
       <div class="delta-box-label">Changes observed</div>
       <div class="delta-row">
@@ -460,6 +461,7 @@ buildGrid('grid1', O, O, null);      // Screen 1: identical, no highlight
 buildGrid('grid2', O, C, 'assets');  // Screen 2: assets highlighted
 buildGrid('grid3', O, C, 'liab');    // Screen 3: liabilities highlighted
 buildGrid('grid4', O, C, 'equity');  // Screen 4: RE + total equities highlighted
+buildGrid('grid5', O, C, null);      // Screen 5: no highlight, full comparison
 
 // ── FEEDBACK MESSAGES ─────────────────────────────────────────
 var FB = {
