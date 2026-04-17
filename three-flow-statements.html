@@ -22,8 +22,6 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
   background: white; border-radius: 14px; padding: 28px;
   margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
 }
-.section-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #111; }
-.section-sub   { font-size: 13px; color: #666; margin-bottom: 14px; line-height: 1.5; }
 
 .prose p { font-family: 'Open Sans', sans-serif; font-size: 1rem; color: #333; line-height: 1.8; margin-bottom: 14px; }
 .prose p:last-child { margin-bottom: 0; }
@@ -35,7 +33,7 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
 .subsection-head:first-child { margin-top: 0; }
 
 /* ================================================================
-   ACTIVITY CARDS
+   ACTIVITY CARD CHROME
 ================================================================ */
 .activity-card {
   background: white; border-radius: 14px; padding: 28px;
@@ -66,10 +64,9 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
 .act-progress { font-size: 12px; color: #888; font-weight: 600; }
 
 /* ================================================================
-   ACTIVITY 1 — MATCH THE STATEMENT
+   ACTIVITY — MATCH THE STATEMENT
 ================================================================ */
 .match-list { display: flex; flex-direction: column; gap: 14px; }
-.match-row { }
 .match-prompt {
   font-size: 13px; font-weight: 600; color: #222;
   margin-bottom: 8px; line-height: 1.5;
@@ -85,7 +82,7 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
 .match-opt {
   border: 1.5px solid #e2e8f0; border-radius: 7px; padding: 7px 13px;
   font-size: 12px; font-weight: 600; color: #444; cursor: pointer;
-  background: white; transition: all 0.15s; white-space: nowrap;
+  background: white; transition: all 0.15s;
 }
 .match-opt:hover:not(.locked) { border-color: #00329d; color: #00329d; }
 .match-opt.correct { border-color: #16a34a !important; background: #f0fdf4 !important; color: #14532d !important; }
@@ -98,43 +95,6 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
 .match-fb.show { display: block; }
 .match-fb.ok  { background: #f0fdf4; color: #166534; }
 .match-fb.inf { background: #eff6ff; color: #1e3a5f; }
-
-/* ================================================================
-   ACTIVITY 2 — CASH, INCOME, OR BOTH?
-================================================================ */
-.tri-grid { display: flex; flex-direction: column; gap: 10px; }
-.tri-item {
-  background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px;
-  padding: 13px 16px; transition: border-color 0.2s, background 0.2s;
-}
-.tri-item.correct { background: #f0fdf4; border-color: #86efac; }
-.tri-item.wrong   { background: #fef2f2; border-color: #fca5a5; }
-.tri-top { display: flex; align-items: center; gap: 12px; }
-.tri-text { flex: 1; font-size: 13px; font-weight: 600; color: #222; line-height: 1.4; }
-.tri-hint {
-  font-size: 12px; font-weight: 400; margin-top: 6px; display: none; line-height: 1.5;
-}
-.tri-item.correct .tri-hint { display: block; color: #166534; }
-.tri-item.wrong   .tri-hint { display: block; color: #991b1b; }
-.tri-btns { display: flex; gap: 6px; flex-shrink: 0; }
-.tri-btn {
-  border: 1.5px solid #d1d5db; border-radius: 7px; padding: 5px 11px;
-  font-family: Inter, sans-serif; font-size: 11px; font-weight: 700;
-  cursor: pointer; background: white; color: #444; transition: all 0.15s;
-  text-transform: uppercase; letter-spacing: 0.3px;
-}
-.tri-btn:hover:not(:disabled) { border-color: #00329d; color: #00329d; }
-.tri-btn.sel-cash   { background: #0369a1; border-color: #0369a1; color: white; }
-.tri-btn.sel-income { background: #7c3aed; border-color: #7c3aed; color: white; }
-.tri-btn.sel-both   { background: #059669; border-color: #059669; color: white; }
-.tri-btn:disabled { cursor: default; }
-.tri-result {
-  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
-  display: none; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700;
-}
-.tri-item.correct .tri-result { display: flex; background: #16a34a; color: white; }
-.tri-item.wrong   .tri-result { display: flex; background: #dc2626; color: white; }
 </style>
 </head>
 <body>
@@ -151,21 +111,7 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
   </div>
 
   <!-- ============================================================
-       ACTIVITY 1 — MATCH THE STATEMENT
-  ============================================================ -->
-  <div class="activity-card">
-    <div class="activity-tag">&#10003; Activity 1 of 2</div>
-    <div class="activity-title">Which Statement Is It?</div>
-    <div class="activity-desc">Each flow statement has a distinct role. For each prompt, select the statement that best matches it.</div>
-    <div class="match-list" id="matchList1"></div>
-    <div class="act-footer">
-      <span class="act-progress" id="act1Progress">0 of 5 answered</span>
-      <button class="btn btn-outline" onclick="resetMatch1()">Reset</button>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       OPERATIONS TEXT
+       OPERATIONS + CASH TEXT
   ============================================================ -->
   <div class="text-block">
     <div class="prose">
@@ -174,20 +120,6 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
       <p>The income statement reports this: what came in from operations, what went out, and what the difference was over the period. This is the channel that most people think of first when they ask "how did the entity do this year?" It is the system's attempt to show whether the entity created or consumed worth through its activities.</p>
       <p class="subsection-head">Cash</p>
       <p>Operations as reported on the income statement do not necessarily move in lockstep with cash. A company can record a sale (revenue) before it collects the cash — the customer owes the money but has not paid yet. It can incur an expense (like depreciation) that involves no cash movement at all. Revenue and expense are conventions for recognizing worth created and consumed. Cash is a fact about what actually moved.</p>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       ACTIVITY 2 — CASH, INCOME, OR BOTH?
-  ============================================================ -->
-  <div class="activity-card">
-    <div class="activity-tag">&#10003; Activity 2 of 2</div>
-    <div class="activity-title">Cash, Income, or Both?</div>
-    <div class="activity-desc">For each event below, does it affect the cash flow statement, the income statement, or both? Choose the best answer for each.</div>
-    <div class="tri-grid" id="triGrid"></div>
-    <div class="act-footer">
-      <span class="act-progress" id="act2Progress">0 of 4 answered</span>
-      <button class="btn btn-outline" onclick="resetTri()">Reset</button>
     </div>
   </div>
 
@@ -202,62 +134,82 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
     </div>
   </div>
 
+  <!-- ============================================================
+       ACTIVITY — WHICH STATEMENT IS IT?
+  ============================================================ -->
+  <div class="activity-card">
+<div class="activity-title">Which Statement Is It?</div>
+    <div class="activity-desc">You have now seen all three flow statements and what each one tracks. For each item below, select the statement it belongs to.</div>
+    <div class="match-list" id="matchList"></div>
+    <div class="act-footer">
+      <span class="act-progress" id="actProgress">0 of 6 answered</span>
+      <button class="btn btn-outline" onclick="resetMatch()">Reset</button>
+    </div>
+  </div>
+
 </div><!-- /page -->
 
 <script>
-/* ================================================================
-   ACTIVITY 1 — MATCH THE STATEMENT
-================================================================ */
-var MATCH1 = [
+var ITEMS = [
   {
     q: 'Profit or loss from operations',
-    opts: ['Income Statement', 'Cash Flow Statement', 'Statement of Changes in Equities'],
     correct: 0,
-    hint: 'The Income Statement reports revenues and expenses — the difference is profit or loss for the period.'
+    hintOk:    'The Income Statement reports revenues and expenses over the period, so it explains whether operations produced a profit or a loss.',
+    hintWrong: 'Not quite — this belongs to the Income Statement, because profit or loss comes from revenues minus expenses over the period.'
   },
   {
     q: 'Actual cash moving in and out',
-    opts: ['Income Statement', 'Cash Flow Statement', 'Statement of Changes in Equities'],
     correct: 1,
-    hint: 'The Cash Flow Statement tracks every real cash movement, regardless of when income was recognized.'
+    hintOk:    'The Statement of Cash Flows tracks actual cash received and paid during the period, grouped into operating, investing, and financing activities.',
+    hintWrong: 'Not quite — this belongs to the Statement of Cash Flows, because it tracks actual cash inflows and outflows during the period.'
   },
   {
     q: 'Dividends paid to owners',
-    opts: ['Income Statement', 'Cash Flow Statement', 'Statement of Changes in Equities'],
     correct: 2,
-    hint: 'Dividends are a distribution to owners — they reduce equities and appear in the Statement of Changes in Equities.'
+    hintOk:    'The Statement of Changes in Equities reports distributions to owners, including dividends, because they change equity but are not part of profit or loss.',
+    hintWrong: 'Not quite — this belongs to the Statement of Changes in Equities, because dividends are distributions to owners that reduce equity.'
+  },
+  {
+    q: 'Additional capital contributed by owners',
+    correct: 2,
+    hintOk:    'The Statement of Changes in Equities reports owner contributions because they increase equity without being operating income.',
+    hintWrong: 'Not quite — this belongs to the Statement of Changes in Equities, because owner contributions increase equity but are not income.'
   },
   {
     q: 'Revenue earned before cash is collected',
-    opts: ['Income Statement', 'Cash Flow Statement', 'Statement of Changes in Equities'],
     correct: 0,
-    hint: 'Revenue is recognized when earned, not when cash arrives. It appears on the Income Statement even if the cash has not yet been received.'
+    hintOk:    'The Income Statement reports revenue when it is earned, even if the cash has not yet been collected.',
+    hintWrong: 'Not quite — this belongs to the Income Statement, because revenue is recognized when earned, not when cash is received.'
   },
   {
-    q: 'Full movement from opening equity to closing equity',
-    opts: ['Income Statement', 'Cash Flow Statement', 'Statement of Changes in Equities'],
+    q: 'The full movement from opening equity to closing equity',
     correct: 2,
-    hint: 'The Statement of Changes in Equities is the complete bridge — it accounts for every source of change between the two balance sheet dates.'
+    hintOk:    'The Statement of Changes in Equities provides the full reconciliation from opening equity to closing equity by showing all categories of change during the period.',
+    hintWrong: 'Not quite — this belongs to the Statement of Changes in Equities, because it shows the complete bridge from beginning equity to ending equity.'
   }
 ];
 
-var match1Answers = new Array(MATCH1.length).fill(null);
+var OPTS = ['Income Statement', 'Statement of Cash Flows', 'Statement of Changes in Equities'];
+var answers = new Array(ITEMS.length).fill(null);
 
-function renderMatch1() {
-  var list = document.getElementById('matchList1');
+function renderMatch() {
+  var list = document.getElementById('matchList');
   list.innerHTML = '';
   var answered = 0;
-  MATCH1.forEach(function(item, qi) {
-    var ans = match1Answers[qi];
+  ITEMS.forEach(function(item, qi) {
+    var ans = answers[qi];
     if (ans !== null) answered++;
+
     var row = document.createElement('div');
     row.className = 'match-row';
+
     var prompt = document.createElement('div');
     prompt.className = 'match-prompt';
     prompt.innerHTML = '<span class="match-num">' + (qi + 1) + '</span>' + item.q;
+
     var opts = document.createElement('div');
     opts.className = 'match-opts';
-    item.opts.forEach(function(opt, oi) {
+    OPTS.forEach(function(opt, oi) {
       var b = document.createElement('div');
       b.className = 'match-opt';
       b.textContent = opt;
@@ -267,116 +219,39 @@ function renderMatch1() {
         else if (oi === ans && oi !== item.correct) b.classList.add('wrong');
         else if (oi === item.correct) b.classList.add('correct');
       } else {
-        b.addEventListener('click', function() { match1Answers[qi] = oi; renderMatch1(); });
+        (function(o) {
+          b.addEventListener('click', function() { answers[qi] = o; renderMatch(); });
+        })(oi);
       }
       opts.appendChild(b);
     });
+
     var fb = document.createElement('div');
     fb.className = 'match-fb';
     if (ans !== null) {
       fb.classList.add('show');
       fb.classList.add(ans === item.correct ? 'ok' : 'inf');
-      fb.textContent = (ans === item.correct ? '✓ ' : 'Not quite — ') + item.hint;
+      fb.textContent = ans === item.correct ? '✓ ' + item.hintOk : item.hintWrong;
     }
+
     row.appendChild(prompt);
     row.appendChild(opts);
     row.appendChild(fb);
     list.appendChild(row);
   });
-  var prog = document.getElementById('act1Progress');
-  prog.textContent = answered + ' of ' + MATCH1.length + ' answered';
-  if (answered === MATCH1.length) prog.style.color = '#16a34a';
+
+  var prog = document.getElementById('actProgress');
+  prog.textContent = answered + ' of ' + ITEMS.length + ' answered';
+  if (answered === ITEMS.length) prog.style.color = '#16a34a';
 }
 
-function resetMatch1() {
-  match1Answers = new Array(MATCH1.length).fill(null);
-  document.getElementById('act1Progress').style.color = '';
-  renderMatch1();
+function resetMatch() {
+  answers = new Array(ITEMS.length).fill(null);
+  document.getElementById('actProgress').style.color = '';
+  renderMatch();
 }
 
-renderMatch1();
-
-/* ================================================================
-   ACTIVITY 2 — CASH, INCOME, OR BOTH?
-================================================================ */
-var TRI_ITEMS = [
-  {
-    text: 'A sale on credit',
-    answer: 'income',
-    hint: 'Revenue is recognized when the sale is made, not when cash arrives. The cash flow statement is not yet affected.'
-  },
-  {
-    text: 'Collection of an old receivable',
-    answer: 'cash',
-    hint: 'Cash arrives now, but the income was already recorded when the original sale was made. This is a cash event only.'
-  },
-  {
-    text: 'Depreciation expense',
-    answer: 'income',
-    hint: 'Depreciation allocates the cost of an asset over its useful life. No cash leaves the entity — it is an income statement item only.'
-  },
-  {
-    text: 'Payment of salaries in cash',
-    answer: 'both',
-    hint: 'Cash leaves the entity and an expense is recognized at the same time — this affects both statements.'
-  }
-];
-
-var triState = new Array(TRI_ITEMS.length).fill(null);
-
-function renderTri() {
-  var grid = document.getElementById('triGrid');
-  grid.innerHTML = '';
-  var answered = 0;
-  TRI_ITEMS.forEach(function(item, i) {
-    var ans = triState[i];
-    var isCorrect = ans !== null ? (ans === item.answer) : null;
-    if (ans !== null) answered++;
-    var row = document.createElement('div');
-    row.className = 'tri-item' + (isCorrect === true ? ' correct' : isCorrect === false ? ' wrong' : '');
-    var top = document.createElement('div');
-    top.className = 'tri-top';
-    var txt = document.createElement('div');
-    txt.className = 'tri-text';
-    txt.textContent = item.text;
-    var btns = document.createElement('div');
-    btns.className = 'tri-btns';
-    [['Cash','cash','sel-cash'],['Income','income','sel-income'],['Both','both','sel-both']].forEach(function(opt) {
-      var b = document.createElement('button');
-      b.className = 'tri-btn';
-      b.textContent = opt[0];
-      if (ans !== null) {
-        b.disabled = true;
-        if (ans === opt[1]) b.classList.add(opt[2]);
-      }
-      b.addEventListener('click', function() { triState[i] = opt[1]; renderTri(); });
-      btns.appendChild(b);
-    });
-    var result = document.createElement('div');
-    result.className = 'tri-result';
-    result.textContent = isCorrect ? '✓' : '✗';
-    top.appendChild(txt);
-    top.appendChild(btns);
-    top.appendChild(result);
-    var hint = document.createElement('div');
-    hint.className = 'tri-hint';
-    hint.textContent = (isCorrect === false ? '✗ ' : '✓ ') + item.hint;
-    row.appendChild(top);
-    row.appendChild(hint);
-    grid.appendChild(row);
-  });
-  var prog = document.getElementById('act2Progress');
-  prog.textContent = answered + ' of ' + TRI_ITEMS.length + ' answered';
-  if (answered === TRI_ITEMS.length) prog.style.color = '#16a34a';
-}
-
-function resetTri() {
-  triState = new Array(TRI_ITEMS.length).fill(null);
-  document.getElementById('act2Progress').style.color = '';
-  renderTri();
-}
-
-renderTri();
+renderMatch();
 </script>
 </body>
 </html>

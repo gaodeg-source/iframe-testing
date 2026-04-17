@@ -117,8 +117,8 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
   cursor: pointer; background: white; color: #444; transition: all 0.15s;
 }
 .sort-btn:hover:not(:disabled) { border-color: #00329d; color: #00329d; }
-.sort-btn.selected-snap  { background: #00329d; border-color: #00329d; color: white; }
-.sort-btn.selected-story { background: #6366f1; border-color: #6366f1; color: white; }
+.sort-btn.selected-shown { background: #00329d; border-color: #00329d; color: white; }
+.sort-btn.selected-needs { background: #6366f1; border-color: #6366f1; color: white; }
 .sort-btn:disabled { cursor: default; }
 .sort-result {
   width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
@@ -313,8 +313,8 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
   ============================================================ -->
   <div class="section-card activity-card">
     <div class="activity-tag">&#10003; Activity 1 of 3</div>
-    <div class="activity-title">Snapshot or Story?</div>
-    <div class="activity-desc">Does the balance sheet show each item directly? For every row, choose <strong>Snapshot</strong> (balance sheet shows it) or <strong>Story</strong> (a flow statement is needed).</div>
+    <div class="activity-title">Snapshot or Explanation?</div>
+    <div class="activity-desc">Does the balance sheet show each item directly? For every row, choose <strong>Shown directly</strong> if the balance sheet shows it, or <strong>Needs explanation</strong> if a flow statement or other additional information is needed.</div>
     <div class="sort-grid" id="sortGrid"></div>
     <div class="act-footer">
       <span class="act-progress" id="act1Progress">0 of 6 answered</span>
@@ -497,12 +497,12 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
    ACTIVITY 1 — SNAPSHOT OR STORY
 ================================================================ */
 var SORT_ITEMS = [
-  { text: 'Cash on December 31',                          label: 'snapshot', hint: 'A balance at a specific date — exactly what balance sheets record.' },
-  { text: 'Total liabilities on December 31',             label: 'snapshot', hint: 'All obligations as of the reporting date appear directly on the balance sheet.' },
-  { text: 'Whether the company borrowed money this year', label: 'story',    hint: 'Borrowing is an activity over time — it shows up in the Cash Flow Statement.' },
-  { text: 'Whether sales increased in June',              label: 'story',    hint: 'Revenue earned during a period is the income statement\'s territory, not the balance sheet.' },
-  { text: 'Inventory held at year-end',                   label: 'snapshot', hint: 'What the company holds on that date — balance sheet material.' },
-  { text: 'How much profit the company earned last year', label: 'story',    hint: 'Profit is a period measure — it belongs to the Income Statement.' }
+  { text: 'Cash on December 31',                          label: 'shown', hint: 'A balance at a specific date — exactly what balance sheets record.' },
+  { text: 'Total liabilities on December 31',             label: 'shown', hint: 'All obligations as of the reporting date appear directly on the balance sheet.' },
+  { text: 'Whether the company borrowed money this year', label: 'needs', hint: 'Borrowing is an activity over time — it shows up in the Cash Flow Statement.' },
+  { text: 'Whether sales increased in June',              label: 'needs', hint: 'Revenue earned during a period is the income statement\'s territory, not the balance sheet.' },
+  { text: 'Inventory held at year-end',                   label: 'shown', hint: 'What the company holds on that date — balance sheet material.' },
+  { text: 'How much profit the company earned last year', label: 'needs', hint: 'Profit is a period measure — it belongs to the Income Statement.' }
 ];
 var sortState = new Array(SORT_ITEMS.length).fill(null);
 
@@ -523,14 +523,14 @@ function renderSort() {
     hint.textContent = (isCorrect === false ? '✗ ' : '✓ ') + item.hint;
     textWrap.appendChild(txt); textWrap.appendChild(hint);
     var btns = document.createElement('div'); btns.className = 'sort-btns';
-    ['Snapshot','Story'].forEach(function(label) {
-      var val = label.toLowerCase();
+    [['Shown directly','shown'],['Needs explanation','needs']].forEach(function(pair) {
+      var label = pair[0]; var val = pair[1];
       var b = document.createElement('button'); b.className = 'sort-btn'; b.textContent = label;
       if (ans !== null) {
         b.disabled = true;
-        if (ans === val) b.classList.add(val === 'snapshot' ? 'selected-snap' : 'selected-story');
+        if (ans === val) b.classList.add(val === 'shown' ? 'selected-shown' : 'selected-needs');
       }
-      b.addEventListener('click', function() { sortState[i] = val; renderSort(); });
+      (function(v){ b.addEventListener('click', function() { sortState[i] = v; renderSort(); }); })(val);
       btns.appendChild(b);
     });
     var result = document.createElement('div'); result.className = 'sort-result';
@@ -568,6 +568,10 @@ var DND_ITEMS = [
     feedback: 'This cannot be determined from the snapshots alone. The balance sheets may show a different equipment balance, but they do not reveal whether the change came from a purchase, depreciation, disposal, or another event.' }
 ];
 
+for (var _i = DND_ITEMS.length - 1; _i > 0; _i--) {
+  var _j = Math.floor(Math.random() * (_i + 1));
+  var _tmp = DND_ITEMS[_i]; DND_ITEMS[_i] = DND_ITEMS[_j]; DND_ITEMS[_j] = _tmp;
+}
 var dndPlacement = {};
 DND_ITEMS.forEach(function(item) { dndPlacement[item.id] = 'pool'; });
 var dndDragging = null;
