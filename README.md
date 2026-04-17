@@ -10,6 +10,7 @@ Static pages (minimal chrome) for OLI Torus **Webpage** blocks.
 - `simplified-example.html` — ExampleCo articulation exercise (3-layer, standalone; links to apple/)
 - `homework.html` — Homework I
 - `two-snapshots.html` — Two Snapshots reading page with three embedded activities (Snapshot or Story, Which Statement Explains the Change, drag-and-drop classification)
+- `three-flow-statements.html` — Three Flow Statements reading page with two embedded activities (Which Statement Is It? match, Cash/Income/Both tri-sort)
 
 ### apple/
 - `apple-example.html` — Apple FY2024 articulation exercise (links back to simplified-example.html)
@@ -31,6 +32,7 @@ Deploy from **`main`** / **`/(root)`**, then for example:
 
 - `https://gaodeg-source.github.io/iframe-testing/intro-activity.html`
 - `https://gaodeg-source.github.io/iframe-testing/two-snapshots.html`
+- `https://gaodeg-source.github.io/iframe-testing/three-flow-statements.html`
 - `https://gaodeg-source.github.io/iframe-testing/simplified-example.html`
 - `https://gaodeg-source.github.io/iframe-testing/apple/apple-example.html`
 - `https://gaodeg-source.github.io/iframe-testing/entity-diagram/entity-diagram.html`
