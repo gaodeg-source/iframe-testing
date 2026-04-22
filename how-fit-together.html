@@ -67,80 +67,7 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
 .act-footer-btns { display: flex; gap: 8px; }
 
 /* ================================================================
-   ACTIVITY 1 — BUILD THE DECOMPOSITION
-================================================================ */
-.decomp-diagram {
-  display: flex; flex-direction: column; align-items: stretch;
-}
-.decomp-bs-box {
-  background: #00329d; color: white; border-radius: 10px; padding: 13px 18px;
-}
-.decomp-bs-name { font-size: 13px; font-weight: 700; }
-.decomp-bs-date { font-size: 11px; opacity: 0.72; margin-top: 2px; }
-.decomp-connector {
-  display: flex; justify-content: center; padding: 5px 0;
-  color: #94a3b8; font-size: 20px; line-height: 1; user-select: none;
-}
-.decomp-layers { display: flex; flex-direction: column; gap: 5px; }
-.decomp-slot {
-  border: 2px dashed #cbd5e1; border-radius: 10px; padding: 12px 16px;
-  display: flex; align-items: center; gap: 12px; min-height: 56px;
-  background: #f8fafc; transition: border-color 0.3s, background 0.3s;
-}
-.decomp-slot.filled { border-style: solid; background: white; }
-.decomp-dot {
-  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-  background: #cbd5e1; transition: background 0.3s;
-}
-.decomp-slot-body { flex: 1; }
-.decomp-slot-name {
-  font-size: 12px; font-weight: 400; color: #94a3b8; font-style: italic;
-}
-.decomp-slot.filled .decomp-slot-name {
-  font-weight: 700; color: #111; font-style: normal;
-}
-.decomp-slot-desc {
-  font-size: 11px; line-height: 1.5; margin-top: 3px; display: none;
-}
-.decomp-slot.filled .decomp-slot-desc { display: block; }
-
-.decomp-cards-section { margin-top: 20px; }
-.decomp-cards-label {
-  font-size: 11px; font-weight: 700; color: #888;
-  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;
-}
-.decomp-cards { display: flex; flex-direction: column; gap: 8px; }
-.decomp-card {
-  border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 16px;
-  cursor: pointer; background: white; transition: all 0.15s;
-  display: flex; align-items: center; gap: 12px;
-}
-.decomp-card:hover:not(.placed) { border-color: #00329d; box-shadow: 0 0 0 3px #eff6ff; }
-.decomp-card.placed {
-  opacity: 0.35; cursor: default; pointer-events: none;
-}
-.decomp-card-dot {
-  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-}
-.decomp-card-body { flex: 1; }
-.decomp-card-name { font-size: 12px; font-weight: 700; color: #111; }
-.decomp-card-subdesc { font-size: 11px; color: #666; margin-top: 2px; line-height: 1.4; }
-.decomp-card-hint { font-size: 11px; color: #888; margin-top: 1px; }
-.decomp-card-action {
-  font-size: 11px; font-weight: 600; color: #00329d;
-  white-space: nowrap; flex-shrink: 0;
-}
-.decomp-card.placed .decomp-card-action { display: none; }
-
-.decomp-complete {
-  margin-top: 16px; background: #f0fdf4; border: 1.5px solid #86efac;
-  border-radius: 10px; padding: 12px 16px;
-  font-size: 13px; color: #166534; line-height: 1.6; display: none;
-}
-.decomp-complete.show { display: block; }
-
-/* ================================================================
-   ACTIVITY 2 — MULTI-SELECT
+   ACTIVITY — MULTI-SELECT
 ================================================================ */
 .ms-list { display: flex; flex-direction: column; gap: 10px; }
 .ms-item {
@@ -173,18 +100,24 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
 /* ================================================================
    RABBIT HOLE ACCORDION
 ================================================================ */
-.rabbit-hole { margin-top: 28px; border-top: 1.5px solid #d1d5db; padding-top: 20px; }
-.rh-toggle {
-  display: flex; align-items: center; gap: 10px; cursor: pointer;
-  background: none; border: none; font-family: Inter, sans-serif;
-  padding: 0; text-align: left; width: 100%;
+.rabbit-hole {
+  margin-top: 28px; background: #fffbf5;
+  border: 1px solid #f0dcc8; border-radius: 6px; overflow: hidden;
 }
-.rh-icon { font-size: 18px; line-height: 1; }
-.rh-label { font-size: 14px; font-weight: 600; color: #333; flex: 1; line-height: 1.4; }
-.rh-chevron { font-size: 13px; color: #888; transition: transform 0.2s; }
-.rh-toggle.open .rh-chevron { transform: rotate(90deg); }
-.rh-body { display: none; margin-top: 16px; }
-.rh-body.open { display: block; }
+.rh-toggle {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 14px 18px;
+  background: none; border: none; cursor: pointer;
+  font-family: Inter, sans-serif; font-size: 14px; font-weight: 600;
+  color: #bd5319; text-align: left; transition: background 0.15s;
+}
+.rh-toggle:hover { background: #fff5eb; }
+.rh-icon { font-size: 16px; flex-shrink: 0; }
+.rh-label { flex: 1; line-height: 1.4; }
+.rh-chevron { margin-left: auto; font-size: 11px; color: #caa; transition: transform 0.2s; }
+.rh-toggle.open .rh-chevron { transform: rotate(180deg); }
+.rh-body { display: none; padding: 0 18px; }
+.rh-body.open { display: block; padding: 0 18px 18px; }
 </style>
 </head>
 <body>
@@ -196,43 +129,6 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
   <div class="text-block">
     <div class="prose">
       <p>It is tempting to think of these as four separate reports that happen to fit together. They are not. There is one change — the difference between the opening balance sheet and the closing balance sheet — and the flow statements are decompositions of that change. The income statement does not "agree with" the change in retained earnings. It is an explanation of part of that change. It cannot be inconsistent with the balance sheets, because it is not a separate account of the same events — it is a breakdown of what happened to one component of equities over the period. The same is true of the cash flow statement: it does not "match" the change in cash on the balance sheet. It is that change, decomposed into operating, investing, and financing categories.</p>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       ACTIVITY 1 — BUILD THE DECOMPOSITION
-  ============================================================ -->
-  <div class="activity-card">
-    <div class="activity-tag">&#10003; Activity 1 of 2</div>
-    <div class="activity-title">Build the Decomposition</div>
-    <div class="activity-desc">The two balance sheets are fixed. The flow statements slot in between — each one explaining a different layer of the same underlying change. Click each card below to place it into the diagram.</div>
-
-    <div class="decomp-diagram">
-      <div class="decomp-bs-box">
-        <div class="decomp-bs-name">Balance Sheet — Opening</div>
-        <div class="decomp-bs-date">Dec 31, 2024</div>
-      </div>
-      <div class="decomp-connector">↓</div>
-      <div class="decomp-layers" id="decompLayers"></div>
-      <div class="decomp-connector">↓</div>
-      <div class="decomp-bs-box">
-        <div class="decomp-bs-name">Balance Sheet — Closing</div>
-        <div class="decomp-bs-date">Dec 31, 2025</div>
-      </div>
-    </div>
-
-    <div class="decomp-cards-section">
-      <div class="decomp-cards-label">Flow statements — click each to place it</div>
-      <div class="decomp-cards" id="decompCards"></div>
-    </div>
-
-    <div class="decomp-complete" id="decompComplete">
-      ✓ The diagram is complete. Notice that the three statements are not separate reports sitting alongside the balance sheets — they live <em>between</em> the two balance sheets, each decomposing a different aspect of the one underlying change.
-    </div>
-
-    <div class="act-footer">
-      <span class="act-progress" id="act1Progress">0 of 3 placed</span>
-      <button class="btn btn-outline" onclick="resetDecomp()">Reset</button>
     </div>
   </div>
 
@@ -258,7 +154,7 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
        ACTIVITY 2 — WHY SINGLE OUT CASH?
   ============================================================ -->
   <div class="activity-card">
-    <div class="activity-tag">&#10003; Activity 2 of 2</div>
+    <div class="activity-tag">&#10003; Activity</div>
     <div class="activity-title">Why Single Out Cash?</div>
     <div class="activity-desc">Select <strong>all</strong> of the statements below that give a genuine reason why the system has a separate cash flow statement. Then click Check.</div>
     <div class="ms-list" id="msList"></div>
@@ -278,7 +174,7 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
     <button class="rh-toggle" id="rhToggle" onclick="toggleRh()">
       <span class="rh-icon">🐇</span>
       <span class="rh-label">Why single out cash for its own statement?</span>
-      <span class="rh-chevron">▶</span>
+      <span class="rh-chevron">▼</span>
     </button>
     <div class="rh-body" id="rhBody">
       <div class="prose">
@@ -294,130 +190,7 @@ body { background: #E6E9F2; font-family: Inter, system-ui, sans-serif; color: #1
 
 <script>
 /* ================================================================
-   ACTIVITY 1 — BUILD THE DECOMPOSITION
-================================================================ */
-var LAYERS = [
-  {
-    id: 'income',
-    color: '#7c3aed',
-    bgFaint: '#f5f3ff',
-    name: 'Income Statement',
-    slotDesc: 'Decomposes the operating portion of the change in equities — revenues earned and expenses incurred over the period.',
-    cardSubdesc: 'Operating portion of the change in equities',
-    cardHint: 'Revenue − Expenses = Profit or loss'
-  },
-  {
-    id: 'cashflow',
-    color: '#0369a1',
-    bgFaint: '#eff6ff',
-    name: 'Cash Flow Statement',
-    slotDesc: 'Decomposes the change in one particular asset — cash — into operating, investing, and financing categories.',
-    cardSubdesc: 'Change in cash, broken into three categories',
-    cardHint: 'Operating · Investing · Financing'
-  },
-  {
-    id: 'changes',
-    color: '#059669',
-    bgFaint: '#f0fdf4',
-    name: 'Statement of Changes in Equities',
-    slotDesc: 'Decomposes the full movement from opening to closing equities — including both the operating result and all transactions with owners.',
-    cardSubdesc: 'Full bridge from opening to closing equities',
-    cardHint: 'Operations + owner transactions + other items'
-  }
-];
-
-var decompPlaced = [false, false, false];
-
-function renderDecomp() {
-  /* --- layers --- */
-  var layersEl = document.getElementById('decompLayers');
-  layersEl.innerHTML = '';
-  LAYERS.forEach(function(layer, i) {
-    var slot = document.createElement('div');
-    slot.className = 'decomp-slot' + (decompPlaced[i] ? ' filled' : '');
-    if (decompPlaced[i]) {
-      slot.style.borderColor = layer.color;
-      slot.style.background = layer.bgFaint;
-    }
-    var dot = document.createElement('div');
-    dot.className = 'decomp-dot';
-    if (decompPlaced[i]) dot.style.background = layer.color;
-    var body = document.createElement('div');
-    body.className = 'decomp-slot-body';
-    var name = document.createElement('div');
-    name.className = 'decomp-slot-name';
-    if (decompPlaced[i]) {
-      name.textContent = layer.name;
-      name.style.color = layer.color;
-    } else {
-      name.textContent = 'Place a card here';
-    }
-    var desc = document.createElement('div');
-    desc.className = 'decomp-slot-desc';
-    desc.style.color = '#444';
-    desc.textContent = layer.slotDesc;
-    body.appendChild(name);
-    body.appendChild(desc);
-    slot.appendChild(dot);
-    slot.appendChild(body);
-    layersEl.appendChild(slot);
-  });
-
-  /* --- cards --- */
-  var cardsEl = document.getElementById('decompCards');
-  cardsEl.innerHTML = '';
-  LAYERS.forEach(function(layer, i) {
-    var card = document.createElement('div');
-    card.className = 'decomp-card' + (decompPlaced[i] ? ' placed' : '');
-    card.addEventListener('click', function() {
-      if (!decompPlaced[i]) { decompPlaced[i] = true; renderDecomp(); }
-    });
-    var dot = document.createElement('div');
-    dot.className = 'decomp-card-dot';
-    dot.style.background = layer.color;
-    var body = document.createElement('div');
-    body.className = 'decomp-card-body';
-    var name = document.createElement('div');
-    name.className = 'decomp-card-name';
-    name.textContent = layer.name;
-    var subdesc = document.createElement('div');
-    subdesc.className = 'decomp-card-subdesc';
-    subdesc.textContent = layer.cardSubdesc;
-    var hint = document.createElement('div');
-    hint.className = 'decomp-card-hint';
-    hint.textContent = layer.cardHint;
-    body.appendChild(name);
-    body.appendChild(subdesc);
-    body.appendChild(hint);
-    var action = document.createElement('div');
-    action.className = 'decomp-card-action';
-    action.textContent = decompPlaced[i] ? '✓ Placed' : '+ Add to diagram';
-    card.appendChild(dot);
-    card.appendChild(body);
-    card.appendChild(action);
-    cardsEl.appendChild(card);
-  });
-
-  /* --- footer --- */
-  var placed = decompPlaced.filter(Boolean).length;
-  var prog = document.getElementById('act1Progress');
-  prog.textContent = placed + ' of 3 placed';
-  if (placed === 3) prog.style.color = '#16a34a';
-
-  var complete = document.getElementById('decompComplete');
-  complete.classList.toggle('show', placed === 3);
-}
-
-function resetDecomp() {
-  decompPlaced = [false, false, false];
-  document.getElementById('act1Progress').style.color = '';
-  renderDecomp();
-}
-
-renderDecomp();
-
-/* ================================================================
-   ACTIVITY 2 — MULTI-SELECT
+   ACTIVITY — MULTI-SELECT
 ================================================================ */
 var MS_ITEMS = [
   {
